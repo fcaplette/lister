@@ -1,0 +1,25 @@
+:root {
+  --navColor: #cdcdcd;
+}
+
+.root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  /* TODO: Adjust width based on device size */
+  padding: 24px 12px 24px 12px;
+
+  width: 300px;
+  height: 100%;
+
+  background-color: var(--navColor);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+}

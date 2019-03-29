@@ -1,0 +1,35 @@
+.root {
+  position: relative;
+
+  padding: 12px 0;
+  height: 100%;
+
+  /*TODO: change px to rem with calc */
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+
+  background-color: #cdcdcd;
+}
+
+.root:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  border-bottom: 2px solid #3366ff;
+  transition: 0.5s;
+}
+
+.root:hover:after {
+  width: 100%;
+}
+
+.root:active {
+  background-color: #ababab;
+}
+
+.root-isSelected {
+  background-color: #ababab;
+}

@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 25px;
+  height: 25px;
+
+  background-color: var(--navColor);
+}
+
+.line {
+  margin-top: 3px;
+  width: 80%;
+  height: 4px;
+  background-color: grey;
+}

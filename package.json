@@ -1,0 +1,44 @@
+{
+  "name": "projectmanager",
+  "version": "1.0.0",
+  "description": "Help manage and build your projects",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./src/server/server.js",
+    "build": "next build",
+    "start": "next start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcaplette/projectManager.git"
+  },
+  "author": "Frédéric Caplette (fcaplette)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fcaplette/projectManager/issues"
+  },
+  "homepage": "https://github.com/fcaplette/projectManager#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.0",
+    "@types/classnames": "^2.2.7",
+    "@types/next": "^8.0.3",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-typescript": "^1.1.1",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-flow": "^6.23.0",
+    "classnames": "^2.2.6",
+    "express": "^4.16.4",
+    "next": "^8.0.3",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.10",
+    "@types/react-dom": "^16.8.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "typescript": "^3.3.4000"
+  }
+}
