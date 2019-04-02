@@ -1,0 +1,41 @@
+- Change Webpack config for CSS loader to see classnames
+- Research redux vs other state solutions (MobX, others?)
+- Implement the state structure + utils to modify the state
+- Implement Todo components (list and item)
+- Implement "Add todo" button in TodoMain component
+-
+
+
+
+Next.js take care of handling which component is rendered in which route. Check more about initialProps (From API?)
+The app witll have 4 routes
+    --> /login       (Cannot be accessed with token, redirect to /)
+    --> /signup      (Cannot be accessed with token, redirect to /)
+    --> /            (TODOS live here)
+    --> /about       (Open source project, author, etc)
+    --> /preferences (Where user can logout, see information about account, etc) 
+
+The / route will be the main app and the first thing to be developed.
+The initial flow is that upon connected, you will have an empty list of todo (develop empty state)
+and one call to action (Add your first TODO). When clicking on that initial button, a modal will open up.
+
+The TODO modal:
+Inside the modal, you have a simple text input with a placeholder: Add your TODO here.
+There must be a secondary field for the date. Check the best solution to pick user date and add it 
+to the DB and state (can you store a luxon `Date` value?). You could have a see more options for your todo
+in which you could set the priority level (potentially also if this todo is recurrent).
+Click enter and your just added your todo.
+
+The Filter menu:
+There will be a filter option with the following state: 
+    --> All
+    --> By Date
+    --> By State (TODO, COMPLETED)
+    --> By Priority (LOW, MEDIUM, HIGH, URGENT)
+
+Each todo item can be completed by clicking the circle. And animation checks it and then it is completed.
+You need a setting to decide if you show completed elements. 
+
+The API:
+API will most likely be in python with Flask/Django framework and the DB would be MySQL.
+This would need to live on a different server which mena that it will need to handle CORS (Cross-origin request server).

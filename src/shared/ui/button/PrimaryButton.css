@@ -1,0 +1,33 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 50px;
+  padding: 12px;
+
+  font-size: 16px;
+  color: #ffffff;
+
+  background-color: #7799ff;
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition-property: background-color;
+  transition-duration: 0.3s;
+}
+
+.root:hover {
+  background-color: #3366ff;
+}
+
+.root:active {
+  color: #cdcdcd;
+  background-color: #2043ad;
+}
+
+.root-isDestructive {
+  background-color: #e6461a;
+}

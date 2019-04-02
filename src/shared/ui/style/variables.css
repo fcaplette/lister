@@ -1,0 +1,10 @@
+:root {
+  --baseFontSize: 12px;
+
+  --baseColor: #3366ff;
+  --lightBaseColor: #7799ff;
+  --darkBaseColor: #2043ad;
+  --baseWhite: #fff;
+  --successColor: #76ec80;
+  --errorColor: #e6461a;
+}

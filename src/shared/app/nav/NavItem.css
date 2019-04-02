@@ -1,8 +1,11 @@
 .root {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   padding: 12px 0;
-  height: 100%;
+  height: 40px;
 
   /*TODO: change px to rem with calc */
   font-size: 14px;

@@ -3,15 +3,19 @@
 }
 
 .root {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
   /* TODO: Adjust width based on device size */
   padding: 24px 12px 24px 12px;
+  box-sizing: border-box;
 
-  width: 300px;
+  max-width: 400px;
+  width: 100%;
   height: 100%;
 
   background-color: var(--navColor);
