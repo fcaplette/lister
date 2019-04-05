@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import * as React from "react";
 
-import styles from "./PrimaryButton.css";
+const styles = require("./PrimaryButton.css");
 
 interface Props {
   isDestructive?: boolean;
@@ -28,13 +28,13 @@ export default class PrimaryButton extends React.Component<Props, {}> {
     });
 
     return (
-      <button className={styles.root} onClick={this.onClick}>
+      <button className={rootClasses} onClick={this.onClick}>
         {children}
       </button>
     );
   }
 
-  onClick(e: Event) {
+  onClick(e: MouseEvent) {
     const { handleClick } = this.props;
 
     e.preventDefault();

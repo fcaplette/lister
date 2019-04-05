@@ -4,15 +4,16 @@
   flex-direction: column;
   justify-content: center;
 
-  padding: 12px 0;
+  margin-top: 12px;
   height: 40px;
 
   /*TODO: change px to rem with calc */
   font-size: 14px;
+  font-family: Helvetica, sans-serif;
   color: #000000;
   text-decoration: none;
 
-  background-color: #cdcdcd;
+  background-color: var(--navColor);
 }
 
 .root:after {

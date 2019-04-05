@@ -11,12 +11,12 @@
   width: 25px;
   height: 25px;
 
-  background-color: var(--navColor);
+  cursor: pointer;
 }
 
 .line {
-  margin-top: 3px;
+  margin-top: 4px;
   width: 80%;
-  height: 4px;
+  height: 3px;
   background-color: grey;
 }
