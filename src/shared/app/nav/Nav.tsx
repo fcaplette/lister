@@ -36,12 +36,15 @@ export default class Nav extends React.Component<Props, State> {
     } else {
       return (
         <div className={styles.root}>
-          <CloseButton
-            positionClass={styles.closeBtn}
-            handleClick={this.onClick}
-          />
-          <NavItem href="/">Home</NavItem>
-          <NavItem href="/about">About</NavItem>
+          <div className={styles.overlay} />
+          <div className={styles.nav}>
+            <CloseButton
+              positionClass={styles.closeBtn}
+              handleClick={this.onClick}
+            />
+            <NavItem href="/">Home</NavItem>
+            <NavItem href="/about">About</NavItem>
+          </div>
         </div>
       );
     }
