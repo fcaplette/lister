@@ -13,7 +13,7 @@ export default (props: Props) => {
         type="text"
         placeholder="Add your todo"
       />
-      <PrimaryButton handleClick={() => null}>Add</PrimaryButton>{" "}
+      <PrimaryButton handleClick={() => null}>Add</PrimaryButton>
     </div>
   );
 };

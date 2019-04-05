@@ -2,9 +2,11 @@
 import classNames from "classnames";
 import * as React from "react";
 
+const styles = require("./PageTitle.css");
+
 interface Props {
   children: string;
-  positionClass: string;
+  positionClass?: string;
 }
 
 export default ({ positionClass, children }: Props) => (

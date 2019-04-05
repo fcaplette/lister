@@ -14,17 +14,18 @@
 
   cursor: pointer;
 
-  transition-property: background-color;
   transition-duration: 0.3s;
 }
 
 .root:hover {
   background-color: #3366ff;
+  transform: scale(1.1);
 }
 
 .root:active {
   color: #cdcdcd;
   background-color: #2043ad;
+  transform: scale(1);
 }
 
 .root-isDestructive {
