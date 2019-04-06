@@ -2,7 +2,7 @@ import * as React from "react";
 
 import TodoItem from "./TodoItem";
 import TodoAddItem from "./TodoAddItem";
-import EmptySectionText from "../../ui/text/EmptySectionText";
+import EmptySectionText from "../../../ui/text/EmptySectionText";
 
 const styles = require("./TodoList.css");
 

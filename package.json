@@ -23,6 +23,8 @@
     "@babel/core": "^7.4.0",
     "@types/classnames": "^2.2.7",
     "@types/next": "^8.0.3",
+    "@types/next-redux-wrapper": "^2.0.2",
+    "@types/react-redux": "^7.0.6",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "babel-cli": "^6.26.0",
@@ -31,13 +33,18 @@
     "classnames": "^2.2.6",
     "express": "^4.16.4",
     "next": "^8.0.3",
+    "next-redux-wrapper": "^3.0.0-alpha.2",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@types/react": "^16.8.10",
     "@types/react-dom": "^16.8.3",
     "awesome-typescript-loader": "^5.2.1",
+    "redux-devtools-extension": "^2.13.8",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.3.4000"
   }
