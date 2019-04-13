@@ -1,0 +1,11 @@
+.root {
+  padding: 12px 0;
+
+  border: 1px dashed red;
+
+  cursor: pointer;
+}
+
+.root-isCompleted {
+  text-decoration: line-through;
+}

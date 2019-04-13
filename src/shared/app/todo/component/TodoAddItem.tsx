@@ -1,19 +1,24 @@
-import React from "react";
-import PrimaryButton from "../../../ui/button/PrimaryButton";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 
-const styles = require("./TodoAddItem.css");
+import TodoAddItemDumb from "./TodoAddItemDumb";
+import { addTodo } from "../action/todoActions";
 
-interface Props {}
-
-export default (props: Props) => {
-  return (
-    <div className={styles.root}>
-      <input
-        className={styles.addInput}
-        type="text"
-        placeholder="Add your todo"
-      />
-      <PrimaryButton handleClick={() => null}>Add</PrimaryButton>
-    </div>
-  );
+const mapStateToProps = (state: Object): Object => {
+  return { ...state };
 };
+
+const mapDispatchToProps = (dispatch: any): Object => {
+  return {
+    handleClick(todo: string) {
+      dispatch(addTodo(todo));
+    }
+  };
+};
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(TodoAddItemDumb);

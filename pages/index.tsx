@@ -20,7 +20,7 @@ export default class IndexPage extends React.Component {
         <Header />
         <div className={styles.root}>
           <div className={styles.content}>
-            <TodoList todos={[]} />
+            <TodoList />
           </div>
         </div>
       </React.Fragment>

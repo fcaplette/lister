@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import todoReducers from "../../todo/reducer/todoReducers";
+import appReducers from "./appReducers";
+import domainReducers from "../../../domain/reducer/domainReducers";
 
 export default combineReducers({
-  todoReducers
+  app: appReducers,
+  domain: domainReducers
 });

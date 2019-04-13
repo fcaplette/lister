@@ -1,34 +1,27 @@
-import * as React from "react";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 
-import TodoItem from "./TodoItem";
-import TodoAddItem from "./TodoAddItem";
-import EmptySectionText from "../../../ui/text/EmptySectionText";
+import { toggleTodo } from "../action/todoActions";
 
-const styles = require("./TodoList.css");
+import TodoListDumb from "./TodoListDumb";
 
-interface Props {
-  todos: Array<Object>;
-}
+const mapStateToProps = (state: Object): Object => {
+  return {
+    todos: state.app.todos
+  };
+};
 
-export default class TodoList extends React.Component<Props> {
-  constructor(props: Props) {
-    super(props);
-  }
+const mapDispatchToProps = (dispatch: any): Object => {
+  return {
+    handleToggleTodo(id: number) {
+      dispatch(toggleTodo(id));
+    }
+  };
+};
 
-  render() {
-    const { todos } = this.props;
-
-    const todosElt = todos.length ? (
-      todos.map((todo: Object) => <TodoItem todo={todo} key={todo.id} />)
-    ) : (
-      <EmptySectionText children={"No TODOS"} />
-    );
-
-    return (
-      <ul className={styles.root}>
-        <TodoAddItem />
-        {todosElt}
-      </ul>
-    );
-  }
-}
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(TodoListDumb);
