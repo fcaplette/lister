@@ -32,7 +32,12 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
           placeholder="Add your todo"
           onChange={this.onChange}
         />
-        <PrimaryButton handleClick={this.onClick}>Add</PrimaryButton>
+        <PrimaryButton
+          handleClick={this.onClick}
+          isDisabled={this.state.todoText.length === 0}
+        >
+          Add
+        </PrimaryButton>
       </div>
     );
   }

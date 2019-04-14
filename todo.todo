@@ -1,10 +1,25 @@
-- Change Webpack config for CSS loader to see classnames
-- Research redux vs other state solutions (MobX, others?)
-- Implement the state structure + utils to modify the state
-- Implement Todo components (list and item)
-- Implement "Add todo" button in TodoMain component
--
-
+☐ Change Webpack config for CSS loader to see classnames
+✔ Implement the state structure + utils to modify the state @done(19-04-14 13:25)
+✔ Implement Todo components (list and item) @done(19-04-14 13:25)
+✔ Implement "Add todo" button in TodoMain component @done(19-04-14 13:25)
+✔ Default View to Show Active @done(19-04-14 13:53)
+☐ Style the todo Item component
+✔ Create a checkbox for complete todos @done(19-04-14 13:54)
+✔ Animate the fading out of done todos @done(19-04-14 14:07)
+☐ Add the edit todo on each individual todo
+☐ Add banner when completing a todo
+☐ Add an edit todo modal and allow user to edit and save their todo.
+☐ Animate todos that are completed
+☐ Allow user to delete a todo
+☐ Add Ability to set a due date
+☐ Add warning when a todo is past
+☐ Add ability to set a priority
+☐ Add sections for each date
+☐ Sort each section by priority
+☐ Move the nav center on desktop
+☐ Handle enter inputs
+✔ Animate the list when one element is completed @done(19-04-14 14:20)
+☐ Make list scrolable (Fix height + scroll)
 
 
 Next.js take care of handling which component is rendered in which route. Check more about initialProps (From API?)

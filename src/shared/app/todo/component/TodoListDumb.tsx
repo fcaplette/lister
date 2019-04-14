@@ -9,6 +9,7 @@ const styles = require("./TodoList.css");
 interface Props {
   todos: Array<Object>;
   handleToggleTodo: (id: number) => void;
+  visibilityFilter: string;
 }
 
 export default class TodoList extends React.Component<Props> {
@@ -17,12 +18,16 @@ export default class TodoList extends React.Component<Props> {
   }
 
   render() {
-    const { todos, handleToggleTodo } = this.props;
+    const { todos, handleToggleTodo, visibilityFilter } = this.props;
 
     const todosElt = todos.length ? (
       todos.map((todo: Object) => (
         <React.Fragment key={todo.id}>
-          <TodoItem {...todo} handleToggleTodo={handleToggleTodo} />
+          <TodoItem
+            {...todo}
+            handleToggleTodo={handleToggleTodo}
+            visibilityFilter={visibilityFilter}
+          />
         </React.Fragment>
       ))
     ) : (
@@ -30,10 +35,10 @@ export default class TodoList extends React.Component<Props> {
     );
 
     return (
-      <ul className={styles.root}>
+      <div className={styles.root}>
         <TodoAddItem />
-        {todosElt}
-      </ul>
+        <ul className={styles.list}>{todosElt}</ul>
+      </div>
     );
   }
 }

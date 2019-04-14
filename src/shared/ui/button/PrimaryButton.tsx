@@ -7,6 +7,7 @@ const styles = require("./PrimaryButton.css");
 
 interface Props {
   isDestructive?: boolean;
+  isDisabled?: boolean;
   children: string;
   handleClick: () => void;
 }
@@ -20,15 +21,20 @@ export default class PrimaryButton extends React.Component<Props, {}> {
   }
 
   render() {
-    const { isDestructive, children } = this.props;
+    const { isDestructive, isDisabled, children } = this.props;
 
     // Classes
     const rootClasses = classNames(styles.root, {
-      [styles["root-isDestructive"]]: isDestructive
+      [styles["root-isDestructive"]]: isDestructive,
+      [styles["root-isDisabled"]]: isDisabled
     });
 
     return (
-      <button className={rootClasses} onClick={this.onClick}>
+      <button
+        className={rootClasses}
+        onClick={this.onClick}
+        disabled={isDisabled}
+      >
         {children}
       </button>
     );

@@ -4,6 +4,7 @@
   align-items: center;
 
   padding: 12px;
+  min-width: 100px;
 
   font-size: 16px;
   color: #ffffff;
@@ -30,4 +31,17 @@
 
 .root-isDestructive {
   background-color: #e6461a;
+}
+
+.root-isDisabled {
+  background-color: grey;
+}
+
+.root-isDisabled:hover {
+  background-color: grey;
+  transform: scale(1);
+}
+
+.root-isDisabled:active {
+  background-color: grey;
 }

@@ -2,12 +2,16 @@ import { compose } from "ramda";
 import { connect } from "react-redux";
 
 import { toggleTodo } from "../action/todoActions";
+import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
+import { getVisibleTodos } from "../util/todoUtils";
 
 import TodoListDumb from "./TodoListDumb";
 
 const mapStateToProps = (state: Object): Object => {
+  const visibilityFilter = getVisibilityFilter(state);
   return {
-    todos: state.app.todos
+    todos: getVisibleTodos(getTodos(state), visibilityFilter),
+    visibilityFilter
   };
 };
 
