@@ -6,6 +6,8 @@ const todosReducer = (state = [], action) => {
       return [...state, todoReducer(undefined, action)];
     case types.TOGGLE_TODO:
       return state.map((todo: Object) => todoReducer(todo, action));
+    case types.UPDATE_TODO:
+      return state.map((todo: Object) => todoReducer(todo, action));
     default:
       return state;
   }
@@ -13,14 +15,14 @@ const todosReducer = (state = [], action) => {
 
 const todoReducer = (state: Object, action: Object) => {
   switch (action.type) {
-    case "ADD_TODO":
+    case types.ADD_TODO:
       return {
         id: action.id,
         text: action.text,
         isCompleted: false
       };
 
-    case "TOGGLE_TODO":
+    case types.TOGGLE_TODO:
       if (state.id !== action.id) {
         return state;
       }
@@ -30,8 +32,17 @@ const todoReducer = (state: Object, action: Object) => {
         isCompleted: !state.isCompleted
       };
 
-    default:
-      return state;
+    case types.UPDATE_TODO:
+      if (state.id !== action.id) {
+        return state;
+      }
+
+      const { params } = action;
+
+      return {
+        ...state,
+        ...params
+      };
   }
 };
 

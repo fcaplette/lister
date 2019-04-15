@@ -10,30 +10,34 @@ interface Props {
   text: string;
   isCompleted: boolean;
   handleToggleTodo: (id: number) => void;
+  handleUpdateTodo: (text: string) => void;
   visibilityFilter: string;
 }
 
 interface State {
-  isEditModalShown: boolean;
+  isEditingTodo: boolean;
   isFadingOut: boolean;
 }
 
 export default class TodoItem extends React.Component<Props> {
   state = {
-    isEditModalShown: false,
+    todoValue: this.props.text,
+    isEditingTodo: false,
     isFadingOut: false
   };
 
   constructor(props: Props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
-    this.onEditClick = this.onEditClick.bind(this);
+    this.onToggleTodo = this.onToggleTodo.bind(this);
+    this.onUpdateTodo = this.onUpdateTodo.bind(this);
+    this.onChangeText = this.onChangeText.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
   render() {
     const { text, isCompleted, visibilityFilter } = this.props;
-    const { isFadingOut } = this.state;
+    const { todoValue, isFadingOut, isEditingTodo } = this.state;
 
     // Classes
 
@@ -45,15 +49,27 @@ export default class TodoItem extends React.Component<Props> {
       [styles["check-isCompleted"]]: isCompleted || isFadingOut
     });
 
+    // Elements
+    const todoText = isEditingTodo ? (
+      <React.Fragment>
+        <input type="text" value={todoValue} onChange={this.onChangeText} />{" "}
+        <span className={styles.save} onClick={this.onSave}>
+          Save
+        </span>
+      </React.Fragment>
+    ) : (
+      <span onClick={this.onUpdateTodo}>{todoValue}</span>
+    );
+
     return (
       <li className={rootClasses}>
-        <button className={checkClasses} onClick={this.onClick} />
-        {text}
+        <button className={checkClasses} onClick={this.onToggleTodo} />
+        {todoText}
       </li>
     );
   }
 
-  onClick() {
+  onToggleTodo() {
     const { id, handleToggleTodo, visibilityFilter } = this.props;
 
     if (visibilityFilter === SHOW_ALL) {
@@ -73,9 +89,26 @@ export default class TodoItem extends React.Component<Props> {
     }
   }
 
-  onEditClick() {
+  onUpdateTodo() {
     this.setState({
-      isEditModalShown: true
+      isEditingTodo: true
     });
+  }
+
+  onChangeText(e) {
+    this.setState({
+      todoValue: e.target.value
+    });
+  }
+
+  onSave() {
+    const { id, handleUpdateTodo } = this.props;
+    const { todoValue } = this.state;
+
+    this.setState({
+      isEditingTodo: false
+    });
+
+    handleUpdateTodo(id, { text: todoValue });
   }
 }

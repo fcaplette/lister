@@ -15,3 +15,11 @@ export const toggleTodo = (id: number) => {
     id
   };
 };
+
+export const updateTodo = (id: number, params: Object) => {
+  return {
+    type: types.UPDATE_TODO,
+    id,
+    params
+  };
+};

@@ -1,7 +1,7 @@
 import { compose } from "ramda";
 import { connect } from "react-redux";
 
-import { toggleTodo } from "../action/todoActions";
+import { toggleTodo, updateTodo } from "../action/todoActions";
 import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
 import { getVisibleTodos } from "../util/todoUtils";
 
@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch: any): Object => {
   return {
     handleToggleTodo(id: number) {
       dispatch(toggleTodo(id));
+    },
+    handleUpdateTodo(id: number, params: Object) {
+      dispatch(updateTodo(id, params));
     }
   };
 };
