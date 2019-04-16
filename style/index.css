@@ -6,6 +6,8 @@
 }
 
 .content {
+  width: 100%;
+  max-width: 800px;
   margin-top: 50px;
   padding: 12px;
 

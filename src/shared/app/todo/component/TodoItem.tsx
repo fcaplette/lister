@@ -1,7 +1,8 @@
 import classNames from "classnames";
 import * as React from "react";
-import SecondaryButton from "../../../ui/button/SecondaryButton";
 import { SHOW_ALL } from "../constant/todoConstants";
+import ContextualButton from "../../../ui/button/ContextualButton";
+import TextInput from "../../../ui/input/TextInput";
 
 const styles = require("./TodoItem.css");
 
@@ -10,16 +11,17 @@ interface Props {
   text: string;
   isCompleted: boolean;
   handleToggleTodo: (id: number) => void;
-  handleUpdateTodo: (text: string) => void;
+  handleUpdateTodo: (id: number, params: Object) => void;
   visibilityFilter: string;
 }
 
 interface State {
   isEditingTodo: boolean;
   isFadingOut: boolean;
+  todoValue: string;
 }
 
-export default class TodoItem extends React.Component<Props> {
+export default class TodoItem extends React.Component<Props, State> {
   state = {
     todoValue: this.props.text,
     isEditingTodo: false,
@@ -36,7 +38,7 @@ export default class TodoItem extends React.Component<Props> {
   }
 
   render() {
-    const { text, isCompleted, visibilityFilter } = this.props;
+    const { isCompleted, visibilityFilter } = this.props;
     const { todoValue, isFadingOut, isEditingTodo } = this.state;
 
     // Classes
@@ -52,10 +54,14 @@ export default class TodoItem extends React.Component<Props> {
     // Elements
     const todoText = isEditingTodo ? (
       <React.Fragment>
-        <input type="text" value={todoValue} onChange={this.onChangeText} />{" "}
-        <span className={styles.save} onClick={this.onSave}>
+        <TextInput
+          value={todoValue}
+          handleChange={this.onChangeText}
+          isFocused
+        />
+        <ContextualButton handleClick={this.onSave} positionClass={styles.save}>
           Save
-        </span>
+        </ContextualButton>
       </React.Fragment>
     ) : (
       <span onClick={this.onUpdateTodo}>{todoValue}</span>
@@ -95,9 +101,9 @@ export default class TodoItem extends React.Component<Props> {
     });
   }
 
-  onChangeText(e) {
+  onChangeText(text: string) {
     this.setState({
-      todoValue: e.target.value
+      todoValue: text
     });
   }
 
