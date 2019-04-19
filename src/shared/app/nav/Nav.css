@@ -10,6 +10,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 3;
 
   width: 100%;
   height: 100%;
@@ -25,7 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  z-index: 5;
+  z-index: 4;
 
   /* TODO: Adjust width based on device size */
   padding: 24px 12px 24px 12px;

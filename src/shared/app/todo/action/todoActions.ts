@@ -1,11 +1,12 @@
 import * as types from "./todoActionTypes";
 
-export const addTodo = (text: string) => {
+export const addTodo = (text: string, priority?: number) => {
   return {
     type: types.ADD_TODO,
     // TODO: Pass unique id
     id: Math.round(Math.random() * 1000),
-    text
+    text,
+    priority
   };
 };
 

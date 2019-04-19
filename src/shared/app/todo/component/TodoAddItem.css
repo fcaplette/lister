@@ -1,10 +1,47 @@
 .root {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+}
+
+.addInputSection {
+  position: relative;
+  margin-right: 8px;
+
+  width: calc(100% - 100px);
 }
 
 .addInput {
-  margin-right: 8px;
-  padding: 4px;
   width: 100%;
+  padding: 4px;
+  min-height: 40px;
+
+  box-sizing: border-box;
+}
+
+.priorityList {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  list-style: none;
+}
+
+.priorityItem {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  padding: 12px;
+}
+
+.priority {
+  position: absolute;
+  top: 20%;
+  right: 16px;
+
+  cursor: pointer;
 }

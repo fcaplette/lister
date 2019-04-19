@@ -53,7 +53,7 @@ export default class TodoItem extends React.Component<Props, State> {
 
     // Elements
     const todoText = isEditingTodo ? (
-      <React.Fragment>
+      <div className={styles.textEdit}>
         <TextInput
           value={todoValue}
           handleChange={this.onChangeText}
@@ -62,9 +62,11 @@ export default class TodoItem extends React.Component<Props, State> {
         <ContextualButton handleClick={this.onSave} positionClass={styles.save}>
           Save
         </ContextualButton>
-      </React.Fragment>
+      </div>
     ) : (
-      <span onClick={this.onUpdateTodo}>{todoValue}</span>
+      <span className={styles.text} onClick={this.onUpdateTodo}>
+        {todoValue}
+      </span>
     );
 
     return (
