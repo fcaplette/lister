@@ -2,11 +2,12 @@ import React from "react";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
+import * as priorities from "../../priority/settings/prioritySettings";
 
 const styles = require("./TodoAddItem.css");
 
 interface Props {
-  handleClick: (todoText: string) => void;
+  handleClick: (todoText: string, priority: number) => void;
 }
 interface State {
   todoText: string;
@@ -68,7 +69,8 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   onClick() {
     this.props.handleClick(this.state.todoText, this.state.currentPriority);
     this.setState({
-      todoText: ""
+      todoText: "",
+      currentPriority: priorities.MEDIUM
     });
   }
 

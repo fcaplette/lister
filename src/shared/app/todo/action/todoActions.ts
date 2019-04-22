@@ -17,10 +17,18 @@ export const toggleTodo = (id: number) => {
   };
 };
 
-export const updateTodo = (id: number, params: Object) => {
+export const updateTodoText = (id: number, text: string) => {
   return {
-    type: types.UPDATE_TODO,
+    type: types.UPDATE_TODO_TEXT,
     id,
-    params
+    text
+  };
+};
+
+export const updateTodoPriority = (id: number, priority: number) => {
+  return {
+    type: types.UPDATE_TODO_PRIORITY,
+    id,
+    priority
   };
 };

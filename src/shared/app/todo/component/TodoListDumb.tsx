@@ -8,8 +8,8 @@ const styles = require("./TodoList.css");
 
 interface Props {
   todos: Array<Object>;
-  handleToggleTodo: (id: number) => void;
-  handleUpdateTodo: (id: number, params: Object) => void;
+  handleUpdateTodoText: (id: number, text: string) => void;
+  handleUpdateTodoPriority: (id: number, priority: number) => void;
   visibilityFilter: string;
 }
 
@@ -22,7 +22,8 @@ export default class TodoList extends React.Component<Props> {
     const {
       todos,
       handleToggleTodo,
-      handleUpdateTodo,
+      handleUpdateTodoText,
+      handleUpdateTodoPriority,
       visibilityFilter
     } = this.props;
 
@@ -32,7 +33,8 @@ export default class TodoList extends React.Component<Props> {
           <TodoItem
             {...todo}
             handleToggleTodo={handleToggleTodo}
-            handleUpdateTodo={handleUpdateTodo}
+            handleUpdateTodoText={handleUpdateTodoText}
+            handleUpdateTodoPriority={handleUpdateTodoPriority}
             visibilityFilter={visibilityFilter}
           />
         </React.Fragment>

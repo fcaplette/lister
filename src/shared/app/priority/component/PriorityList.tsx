@@ -9,7 +9,7 @@ import * as priorities from "../settings/prioritySettings";
 const styles = require("./PriorityList.css");
 
 interface Props {
-  handleClick: (priorityValue: string) => void;
+  handleClick: (priorityValue: number) => void;
 }
 
 export default class PriorityList extends React.Component<Props> {
@@ -45,16 +45,16 @@ export default class PriorityList extends React.Component<Props> {
     );
   }
 
-  onUrgentClick(e) {
+  onUrgentClick() {
     this.props.handleClick(priorities.URGENT);
   }
-  onMajorClick(e) {
+  onMajorClick() {
     this.props.handleClick(priorities.MAJOR);
   }
-  onMediumClick(e) {
+  onMediumClick() {
     this.props.handleClick(priorities.MEDIUM);
   }
-  onLowClick(e) {
+  onLowClick() {
     this.props.handleClick(priorities.LOW);
   }
 }

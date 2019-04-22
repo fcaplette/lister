@@ -1,7 +1,11 @@
 import { compose } from "ramda";
 import { connect } from "react-redux";
 
-import { toggleTodo, updateTodo } from "../action/todoActions";
+import {
+  toggleTodo,
+  updateTodoText,
+  updateTodoPriority
+} from "../action/todoActions";
 import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
 import { getVisibleTodos, sortTodosByPriority } from "../util/todoUtils";
 
@@ -22,8 +26,11 @@ const mapDispatchToProps = (dispatch: any): Object => {
     handleToggleTodo(id: number) {
       dispatch(toggleTodo(id));
     },
-    handleUpdateTodo(id: number, params: Object) {
-      dispatch(updateTodo(id, params));
+    handleUpdateTodoText(id: number, text: string) {
+      dispatch(updateTodoText(id, text));
+    },
+    handleUpdateTodoPriority(id: number, priority: number) {
+      dispatch(updateTodoPriority(id, priority));
     }
   };
 };

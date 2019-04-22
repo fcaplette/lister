@@ -13,9 +13,9 @@ export const getVisibleTodos = (todos, filter) => {
   }
 };
 
-export const sortTodosByPriority = todos => {
+export const sortTodosByPriority = (todos: Array<Object>) => {
   if (todos.length) {
-    return todos.sort(todo => todo.priority);
+    return todos.sort((todo, todo2) => todo.priority - todo2.priority);
   }
 
   return todos;

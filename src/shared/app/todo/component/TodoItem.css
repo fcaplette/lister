@@ -64,3 +64,11 @@
   right: 12px;
   top: 10px;
 }
+
+.priority {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+
+  cursor: pointer;
+}

@@ -3,6 +3,8 @@ import * as React from "react";
 import { SHOW_ALL } from "../constant/todoConstants";
 import ContextualButton from "../../../ui/button/ContextualButton";
 import TextInput from "../../../ui/input/TextInput";
+import PriorityButton from "../../../ui/button/PriorityButton";
+import PriorityList from "../../priority/component/PriorityList";
 
 const styles = require("./TodoItem.css");
 
@@ -10,13 +12,16 @@ interface Props {
   id: number;
   text: string;
   isCompleted: boolean;
+  priority: number;
   handleToggleTodo: (id: number) => void;
-  handleUpdateTodo: (id: number, params: Object) => void;
+  handleUpdateTodoText: (id: number, text: string) => void;
+  handleUpdateTodoPriority: (id: number, priorityValue: number) => void;
   visibilityFilter: string;
 }
 
 interface State {
   isEditingTodo: boolean;
+  isPriorityMenuOpen: boolean;
   isFadingOut: boolean;
   todoValue: string;
 }
@@ -25,6 +30,7 @@ export default class TodoItem extends React.Component<Props, State> {
   state = {
     todoValue: this.props.text,
     isEditingTodo: false,
+    isPriorityMenuOpen: false,
     isFadingOut: false
   };
 
@@ -33,13 +39,20 @@ export default class TodoItem extends React.Component<Props, State> {
 
     this.onToggleTodo = this.onToggleTodo.bind(this);
     this.onUpdateTodo = this.onUpdateTodo.bind(this);
+    this.onPriorityClick = this.onPriorityClick.bind(this);
+    this.onUpdatePriority = this.onUpdatePriority.bind(this);
     this.onChangeText = this.onChangeText.bind(this);
     this.onSave = this.onSave.bind(this);
   }
 
   render() {
-    const { isCompleted, visibilityFilter } = this.props;
-    const { todoValue, isFadingOut, isEditingTodo } = this.state;
+    const { id, isCompleted, visibilityFilter, priority } = this.props;
+    const {
+      todoValue,
+      isFadingOut,
+      isEditingTodo,
+      isPriorityMenuOpen
+    } = this.state;
 
     // Classes
 
@@ -52,6 +65,19 @@ export default class TodoItem extends React.Component<Props, State> {
     });
 
     // Elements
+
+    const priorityBtn = !isEditingTodo && (
+      <PriorityButton
+        handleClick={this.onPriorityClick}
+        positionClass={styles.priority}
+        priorityValue={priority}
+      />
+    );
+
+    const priorityMenuElt = isPriorityMenuOpen && (
+      <PriorityList handleClick={this.onUpdatePriority} />
+    );
+
     const todoText = isEditingTodo ? (
       <div className={styles.textEdit}>
         <TextInput
@@ -73,6 +99,8 @@ export default class TodoItem extends React.Component<Props, State> {
       <li className={rootClasses}>
         <button className={checkClasses} onClick={this.onToggleTodo} />
         {todoText}
+        {priorityBtn}
+        {priorityMenuElt}
       </li>
     );
   }
@@ -110,13 +138,30 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onSave() {
-    const { id, handleUpdateTodo } = this.props;
+    const { id, handleUpdateTodoText } = this.props;
     const { todoValue } = this.state;
 
     this.setState({
       isEditingTodo: false
     });
 
-    handleUpdateTodo(id, { text: todoValue });
+    handleUpdateTodoText(id, todoValue);
+  }
+
+  onPriorityClick() {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        isPriorityMenuOpen: !prevState.isPriorityMenuOpen
+      };
+    });
+  }
+
+  onUpdatePriority(priority: number) {
+    const { id, handleUpdateTodoPriority } = this.props;
+
+    handleUpdateTodoPriority(id, priority);
+
+    this.setState({ isPriorityMenuOpen: false });
   }
 }
