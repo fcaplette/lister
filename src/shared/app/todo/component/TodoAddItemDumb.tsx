@@ -25,7 +25,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onPriorityClick = this.onPriorityClick.bind(this);
     this.setPriority = this.setPriority.bind(this);
@@ -46,6 +46,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             type="text"
             placeholder="Add your todo"
             onChange={this.onChange}
+            onKeyDown={this.onSubmit}
           />
           <div className={styles.priority}>
             <PriorityButton
@@ -56,22 +57,18 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
           </div>
           {priorityMenuElt}
         </div>
-        <PrimaryButton
-          handleClick={this.onClick}
-          isDisabled={this.state.todoText.length === 0}
-        >
-          Add
-        </PrimaryButton>
       </div>
     );
   }
 
-  onClick() {
-    this.props.handleClick(this.state.todoText, this.state.currentPriority);
-    this.setState({
-      todoText: "",
-      currentPriority: priorities.MEDIUM
-    });
+  onSubmit(e: KeyboardEvent) {
+    if (e.key === "Enter" && this.state.todoText.length !== 0) {
+      this.props.handleClick(this.state.todoText, this.state.currentPriority);
+      this.setState({
+        todoText: "",
+        currentPriority: priorities.MEDIUM
+      });
+    }
   }
 
   onPriorityClick() {
