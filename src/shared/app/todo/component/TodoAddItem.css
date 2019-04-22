@@ -19,29 +19,14 @@
   box-sizing: border-box;
 }
 
-.priorityList {
-  position: absolute;
-  top: 0;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  list-style: none;
-}
-
-.priorityItem {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  padding: 12px;
-}
-
 .priority {
   position: absolute;
   top: 20%;
   right: 16px;
 
   cursor: pointer;
+}
+
+.priorityDefault {
+  color: grey;
 }

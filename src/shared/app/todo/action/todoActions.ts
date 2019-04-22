@@ -1,6 +1,6 @@
 import * as types from "./todoActionTypes";
 
-export const addTodo = (text: string, priority?: number) => {
+export const addTodo = (text: string, priority: number) => {
   return {
     type: types.ADD_TODO,
     // TODO: Pass unique id

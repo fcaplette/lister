@@ -19,6 +19,7 @@ const todoReducer = (state: Object, action: Object) => {
       return {
         id: action.id,
         text: action.text,
+        priority: action.priority,
         isCompleted: false
       };
 

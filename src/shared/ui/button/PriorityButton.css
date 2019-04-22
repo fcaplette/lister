@@ -1,2 +1,4 @@
 .root {
+  user-select: none;
+  cursor: pointer;
 }

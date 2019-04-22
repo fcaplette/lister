@@ -1,10 +1,7 @@
 import React from "react";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
 import PriorityButton from "../../../ui/button/PriorityButton";
-import UrgentIcon from "../../../ui/icon/priority/UrgentIcon";
-import MajorIcon from "../../../ui/icon/priority/MajorIcon";
-import MediumIcon from "../../../ui/icon/priority/MediumIcon";
-import LowIcon from "../../../ui/icon/priority/LowIcon";
+import PriorityList from "../../priority/component/PriorityList";
 
 const styles = require("./TodoAddItem.css");
 
@@ -13,12 +10,14 @@ interface Props {
 }
 interface State {
   todoText: string;
+  currentPriority: number;
   isPriorityMenuOpen: boolean;
 }
 
 export default class TodoAddItemDumb extends React.Component<Props, State> {
   state = {
     todoText: "",
+    currentPriority: 2,
     isPriorityMenuOpen: false
   };
 
@@ -27,30 +26,14 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
 
     this.onClick = this.onClick.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.onOpenPriorityMenu = this.onOpenPriorityMenu.bind(this);
+    this.onPriorityClick = this.onPriorityClick.bind(this);
+    this.setPriority = this.setPriority.bind(this);
   }
 
   render() {
     // Elements
     const priorityMenuElt = this.state.isPriorityMenuOpen && (
-      <ul className={styles.priorityList}>
-        <li className={styles.priorityItem}>
-          <UrgentIcon />
-          <span className={styles.priorityText}>Urgent</span>
-        </li>
-        <li className={styles.priorityItem}>
-          <MajorIcon />
-          <span className={styles.priorityText}>Major</span>
-        </li>
-        <li className={styles.priorityItem}>
-          <MediumIcon />
-          <span className={styles.priorityText}>Medium</span>
-        </li>
-        <li className={styles.priorityItem}>
-          <LowIcon />
-          <span className={styles.priorityText}>Low</span>
-        </li>
-      </ul>
+      <PriorityList handleClick={this.setPriority} />
     );
 
     return (
@@ -64,9 +47,13 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             onChange={this.onChange}
           />
           <div className={styles.priority}>
-            <PriorityButton handleClick={this.onOpenPriorityMenu} />
-            {priorityMenuElt}
+            <PriorityButton
+              priorityValue={this.state.currentPriority}
+              positionClass={styles.priorityDefault}
+              handleClick={this.onPriorityClick}
+            />
           </div>
+          {priorityMenuElt}
         </div>
         <PrimaryButton
           handleClick={this.onClick}
@@ -79,15 +66,25 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   }
 
   onClick() {
-    this.props.handleClick(this.state.todoText);
+    this.props.handleClick(this.state.todoText, this.state.currentPriority);
     this.setState({
       todoText: ""
     });
   }
 
-  onOpenPriorityMenu() {
+  onPriorityClick() {
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        isPriorityMenuOpen: !prevState.isPriorityMenuOpen
+      };
+    });
+  }
+
+  setPriority(priorityValue: number) {
     this.setState({
-      isPriorityMenuOpen: true
+      currentPriority: priorityValue,
+      isPriorityMenuOpen: false
     });
   }
 

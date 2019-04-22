@@ -10,8 +10,8 @@ const mapStateToProps = (state: Object): Object => {
 
 const mapDispatchToProps = (dispatch: any): Object => {
   return {
-    handleClick(todo: string) {
-      dispatch(addTodo(todo));
+    handleClick(todo: string, priority: number) {
+      dispatch(addTodo(todo, priority));
     }
   };
 };

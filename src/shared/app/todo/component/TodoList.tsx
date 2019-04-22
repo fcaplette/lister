@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 
 import { toggleTodo, updateTodo } from "../action/todoActions";
 import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
-import { getVisibleTodos } from "../util/todoUtils";
+import { getVisibleTodos, sortTodosByPriority } from "../util/todoUtils";
 
 import TodoListDumb from "./TodoListDumb";
 
 const mapStateToProps = (state: Object): Object => {
   const visibilityFilter = getVisibilityFilter(state);
+  const visibleTodos = getVisibleTodos(getTodos(state), visibilityFilter);
+
   return {
-    todos: getVisibleTodos(getTodos(state), visibilityFilter),
+    todos: sortTodosByPriority(visibleTodos),
     visibilityFilter
   };
 };

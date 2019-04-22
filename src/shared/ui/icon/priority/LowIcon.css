@@ -1,9 +1,6 @@
 .root {
   display: flex;
   flex-direction: column;
-
-  width: 8px;
-  height: 8px;
 }
 
 .arrow {

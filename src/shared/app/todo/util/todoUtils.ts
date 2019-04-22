@@ -12,3 +12,11 @@ export const getVisibleTodos = (todos, filter) => {
       return todos.filter(todo => todo.isCompleted);
   }
 };
+
+export const sortTodosByPriority = todos => {
+  if (todos.length) {
+    return todos.sort(todo => todo.priority);
+  }
+
+  return todos;
+};
