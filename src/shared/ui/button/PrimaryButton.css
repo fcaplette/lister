@@ -20,7 +20,7 @@
 
 .root:hover {
   background-color: #3366ff;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .root:active {

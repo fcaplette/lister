@@ -1,5 +1,4 @@
 import React from "react";
-import PrimaryButton from "../../../ui/button/PrimaryButton";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
 import * as priorities from "../../priority/settings/prioritySettings";
@@ -28,13 +27,13 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onPriorityClick = this.onPriorityClick.bind(this);
-    this.setPriority = this.setPriority.bind(this);
+    this.onSetPriority = this.onSetPriority.bind(this);
   }
 
   render() {
     // Elements
     const priorityMenuElt = this.state.isPriorityMenuOpen && (
-      <PriorityList handleClick={this.setPriority} />
+      <PriorityList handleClick={this.onSetPriority} />
     );
 
     return (
@@ -80,7 +79,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
     });
   }
 
-  setPriority(priorityValue: number) {
+  onSetPriority(priorityValue: number) {
     this.setState({
       currentPriority: priorityValue,
       isPriorityMenuOpen: false

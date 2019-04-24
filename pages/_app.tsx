@@ -1,12 +1,12 @@
 // pages/_app.js
-import React from "react";
+import * as React from "react";
 import { Provider } from "react-redux";
 import App, { Container } from "next/app";
 import withRedux from "next-redux-wrapper";
 
 import configureStore from "../src/shared/app/base/store/store";
 
-class MyApp extends App {
+class MyApp extends App<Props> {
   static async getInitialProps({ Component, ctx }) {
     // we can dispatch from here too
     // ctx.store.dispatch({ type: "FOO", payload: "foo" });

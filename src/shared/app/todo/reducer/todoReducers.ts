@@ -1,8 +1,6 @@
 import * as types from "../action/todoActionTypes";
 
 const todosReducer = (state = [], action: Object) => {
-  console.log(action);
-
   switch (action.type) {
     case types.ADD_TODO:
       return [...state, todoReducer(undefined, action)];

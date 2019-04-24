@@ -1,0 +1,11 @@
+.root {
+  color: #b1b1b1;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+
+  text-decoration: none;
+}
+
+.root:hover {
+  color: blue;
+}

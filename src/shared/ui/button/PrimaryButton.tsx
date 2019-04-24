@@ -10,6 +10,7 @@ interface Props {
   isDisabled?: boolean;
   children: string;
   handleClick: () => void;
+  positionClass?: string;
 }
 
 export default class PrimaryButton extends React.Component<Props, {}> {
@@ -21,10 +22,10 @@ export default class PrimaryButton extends React.Component<Props, {}> {
   }
 
   render() {
-    const { isDestructive, isDisabled, children } = this.props;
+    const { isDestructive, isDisabled, children, positionClass } = this.props;
 
     // Classes
-    const rootClasses = classNames(styles.root, {
+    const rootClasses = classNames(styles.root, positionClass, {
       [styles["root-isDestructive"]]: isDestructive,
       [styles["root-isDisabled"]]: isDisabled
     });
