@@ -6,10 +6,10 @@
 }
 
 .content {
+  position: relative;
   width: 100%;
   max-width: 800px;
-  margin-top: 50px;
-  padding: 12px;
+  padding: 50px 12px 12px 12px;
 
   font-family: Helvetica, Arial, sans-serif;
 

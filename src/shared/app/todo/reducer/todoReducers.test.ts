@@ -45,30 +45,22 @@ describe("todoReducers", () => {
     const stateWithTodos = [
       {
         id: 0,
-        text: "Plant a tree",
-        isCompleted: false,
-        priority: 2
+        text: "Plant a tree"
       },
       {
         id: 1,
-        text: "Make an app",
-        isCompleted: false,
-        priority: 2
+        text: "Make an app"
       }
     ];
 
     const stateWithTodosAfter = [
       {
         id: 0,
-        text: "Updated text",
-        isCompleted: false,
-        priority: 2
+        text: "Updated text"
       },
       {
         id: 1,
-        text: "Make an app",
-        isCompleted: false,
-        priority: 2
+        text: "Make an app"
       }
     ];
     expect(todoReducers(stateWithTodos, actionUpdateTodoText)).toEqual(
@@ -76,20 +68,14 @@ describe("todoReducers", () => {
     );
   });
 
-  it("updates the priority of a single todo", () => {});
-
-  it("toggle the isCompleted value of a todo", () => {
+  it("updates the priority of a single todo", () => {
     const stateWithTodos = [
       {
         id: 0,
-        text: "Plant a tree",
-        isCompleted: false,
         priority: 2
       },
       {
         id: 1,
-        text: "Make an app",
-        isCompleted: false,
         priority: 2
       }
     ];
@@ -97,15 +83,38 @@ describe("todoReducers", () => {
     const stateWithTodosAfter = [
       {
         id: 0,
-        text: "Plant a tree",
-        isCompleted: false,
-        priority: 2
+        priority: 0
       },
       {
         id: 1,
-        text: "Make an app",
-        isCompleted: true,
         priority: 2
+      }
+    ];
+    expect(todoReducers(stateWithTodos, actionUpdateTodoPriority)).toEqual(
+      stateWithTodosAfter
+    );
+  });
+
+  it("toggle the isCompleted value of a todo", () => {
+    const stateWithTodos = [
+      {
+        id: 0,
+        isCompleted: false
+      },
+      {
+        id: 1,
+        isCompleted: false
+      }
+    ];
+
+    const stateWithTodosAfter = [
+      {
+        id: 0,
+        isCompleted: false
+      },
+      {
+        id: 1,
+        isCompleted: true
       }
     ];
 

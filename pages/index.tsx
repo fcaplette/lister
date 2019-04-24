@@ -18,9 +18,9 @@ export default class IndexPage extends React.Component {
     return (
       <React.Fragment>
         <Head />
-        <Header />
         <div className={styles.root}>
           <div className={styles.content}>
+            <Header />
             <VisibilityFilter />
             <TodoList />
           </div>

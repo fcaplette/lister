@@ -44,6 +44,7 @@ export default class Nav extends React.Component<Props, State> {
             />
             <NavItem href="/">Home</NavItem>
             <NavItem href="/about">About</NavItem>
+            <NavItem href="/login">Logout</NavItem>
           </div>
         </div>
       );

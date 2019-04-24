@@ -10,21 +10,22 @@
 ✔ Animate todos that are completed @done(19-04-15 08:00)
 ✔ Add priority when creating a todo @done(19-04-23 07:16)
 ✔ Add Dropdown menu to set priority @done(19-04-23 07:16)
-☐ Add tests for redux state
+✔ Add tests for redux state @done(19-04-24 07:26)
 ✔ Create Text input @done(19-04-17 07:26)
 ☐ Add Ability to set a due date
 ☐ Add warning when a todo is past
 ✔ Add ability to set a priority @done(19-04-23 07:17)
 ☐ Add sections for each date
 ✔ Sort each section by priority @done(19-04-23 07:17)
-☐ Move the nav center on desktop
+✔ Move the nav center on desktop @done(19-04-24 07:14)
 ✔ Handle enter inputs @done(19-04-23 07:17)
 ✔ Animate the list when one element is completed @done(19-04-14 14:20)
 ☐ Make list scrolable (Fix height + scroll)
 ☐ Refactor state so that todo id is the key to an object
-☐ Create Login page
-☐ Create Signup page
-☐ Add logout option in menu
+✔ Create Login page @done(19-04-24 07:14)
+✔ Create Signup page @done(19-04-24 07:14)
+✔ Add logout option in menu @done(19-04-24 07:14)
+☐ Add logic to allow user to logout
 
 
 

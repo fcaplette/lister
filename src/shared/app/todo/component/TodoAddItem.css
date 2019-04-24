@@ -30,3 +30,9 @@
 .priorityDefault {
   color: grey;
 }
+
+.calendar {
+  position: absolute;
+  top: 32px;
+  right: 0;
+}
