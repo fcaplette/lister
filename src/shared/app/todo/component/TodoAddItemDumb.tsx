@@ -1,9 +1,12 @@
 import React from "react";
-import DateTime from "react-datetime";
+import DatePicker from "react-datepicker";
 
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
 import * as priorities from "../../priority/settings/prioritySettings";
+import CalendarTakeover from "../../date/component/CalendarTakeover";
+
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
 const styles = require("./TodoAddItem.css");
 
@@ -39,7 +42,6 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
     this.onSetPriority = this.onSetPriority.bind(this);
 
     //Calendar
-    this.onOpenCalendar = this.onOpenCalendar.bind(this);
     this.onCalendarChange = this.onCalendarChange.bind(this);
   }
 
@@ -50,10 +52,8 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
       <PriorityList handleClick={this.onSetPriority} />
     );
 
-    const calendarElt = isCalendarShown && (
-      <div className={styles.calendar}>
-        <DateTime input={false} open={isCalendarShown} timeFormat={false} />
-      </div>
+    const datePlaceholderElt = !currentDate && (
+      <span className={styles.datePlaceholder}>Pick a date</span>
     );
 
     return (
@@ -68,26 +68,34 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             onKeyDown={this.onSubmit}
           />
           <div className={styles.priority}>
-            <span onClick={this.onOpenCalendar}>CAL</span>
             <PriorityButton
               priorityValue={this.state.currentPriority}
               positionClass={styles.priorityDefault}
               handleClick={this.onPriorityClick}
             />
           </div>
-          {calendarElt}
           {priorityMenuElt}
+        </div>
+        <div className={styles.calendar}>
+          {datePlaceholderElt}
+          <DatePicker
+            selected={this.state.currentDate}
+            onChange={this.onCalendarChange}
+          />
         </div>
       </div>
     );
   }
 
   onSubmit(e: KeyboardEvent) {
-    if (e.key === "Enter" && this.state.todoText.length !== 0) {
-      this.props.handleClick(this.state.todoText, this.state.currentPriority);
+    const { todoText, currentPriority, currentDate } = this.state;
+
+    if (e.key === "Enter" && todoText.length !== 0) {
+      this.props.handleClick(todoText, currentPriority, currentDate);
       this.setState({
         todoText: "",
-        currentPriority: priorities.MEDIUM
+        currentPriority: priorities.MEDIUM,
+        currentDate: ""
       });
     }
   }
@@ -112,16 +120,6 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
     this.setState({
       todoText: e.target.value
     });
-  }
-
-  // Calendar
-
-  onOpenCalendar() {
-    this.setState({
-      isCalendarShown: true
-    });
-
-    console.log(this.state.isCalendarShown);
   }
 
   onCalendarChange(date: Date) {

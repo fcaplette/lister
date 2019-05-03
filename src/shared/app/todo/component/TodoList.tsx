@@ -16,6 +16,7 @@ const mapStateToProps = (state: Object): Object => {
   const visibleTodos = getVisibleTodos(getTodos(state), visibilityFilter);
 
   return {
+    //TODO: Sort todos by day, and then priority in each day
     todos: sortTodosByPriority(visibleTodos),
     visibilityFilter
   };

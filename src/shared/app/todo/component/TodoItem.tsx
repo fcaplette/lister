@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import * as React from "react";
+
 import { SHOW_ALL } from "../constant/todoConstants";
 import ContextualButton from "../../../ui/button/ContextualButton";
 import TextInput from "../../../ui/input/TextInput";
@@ -46,7 +47,7 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { id, isCompleted, visibilityFilter, priority } = this.props;
+    const { id, isCompleted, visibilityFilter, priority, date } = this.props;
     const {
       todoValue,
       isFadingOut,

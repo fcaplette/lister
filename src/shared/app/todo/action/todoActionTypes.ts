@@ -2,6 +2,7 @@ export const ADD_TODO = "ADD_TODO";
 export const TOGGLE_TODO = "TOGGLE_TODO";
 export const UPDATE_TODO_TEXT = "UPDATE_TODO_TEXT";
 export const UPDATE_TODO_PRIORITY = "UPDATE_TODO_PRIORITY";
+export const UPDATE_TODO_DATE = "UPDATE_TODO_DATE";
 export const REMOVE_TODO = "REMOVE_TODO";
 
 export const SHOW_EDIT_MODAL = "SHOW_EDIT_MODAL";
