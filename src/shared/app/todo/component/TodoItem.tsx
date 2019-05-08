@@ -1,11 +1,13 @@
 import classNames from "classnames";
 import * as React from "react";
+import moment from "moment";
 
 import { SHOW_ALL } from "../constant/todoConstants";
 import ContextualButton from "../../../ui/button/ContextualButton";
 import TextInput from "../../../ui/input/TextInput";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
+import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
 
 const styles = require("./TodoItem.css");
 
@@ -14,6 +16,7 @@ interface Props {
   text: string;
   isCompleted: boolean;
   priority: number;
+  date: Date;
   handleToggleTodo: (id: number) => void;
   handleUpdateTodoText: (id: number, text: string) => void;
   handleUpdateTodoPriority: (id: number, priorityValue: number) => void;
@@ -22,6 +25,7 @@ interface Props {
 
 interface State {
   isEditingTodo: boolean;
+  isEditingDate: boolean;
   isPriorityMenuOpen: boolean;
   isFadingOut: boolean;
   todoValue: string;
@@ -31,6 +35,7 @@ export default class TodoItem extends React.Component<Props, State> {
   state = {
     todoValue: this.props.text,
     isEditingTodo: false,
+    isEditingDate: false,
     isPriorityMenuOpen: false,
     isFadingOut: false
   };
@@ -52,6 +57,7 @@ export default class TodoItem extends React.Component<Props, State> {
       todoValue,
       isFadingOut,
       isEditingTodo,
+      isEditingDate,
       isPriorityMenuOpen
     } = this.state;
 
@@ -67,28 +73,17 @@ export default class TodoItem extends React.Component<Props, State> {
 
     // Elements
 
-    const priorityBtn = !isEditingTodo && (
-      <PriorityButton
-        handleClick={this.onPriorityClick}
-        positionClass={styles.priority}
-        priorityValue={priority}
-      />
-    );
-
     const priorityMenuElt = isPriorityMenuOpen && (
       <PriorityList handleClick={this.onUpdatePriority} />
     );
 
     const todoText = isEditingTodo ? (
-      <div className={styles.textEdit}>
+      <div className={styles.textEdit} onKeyDown={this.onSave}>
         <TextInput
           value={todoValue}
           handleChange={this.onChangeText}
           isFocused
         />
-        <ContextualButton handleClick={this.onSave} positionClass={styles.save}>
-          Save
-        </ContextualButton>
       </div>
     ) : (
       <span className={styles.text} onClick={this.onUpdateTodo}>
@@ -96,12 +91,28 @@ export default class TodoItem extends React.Component<Props, State> {
       </span>
     );
 
+    const dateElt = isEditingDate ? (
+      <CalendarDatePicker
+        currentDate={date}
+        handleCalendarChange={this.onCalendarChange}
+      />
+    ) : (
+      <span className={styles.text}>{moment(date).format("MM/DD/YYYY")}</span>
+    );
+
     return (
       <li className={rootClasses}>
-        <button className={checkClasses} onClick={this.onToggleTodo} />
-        {todoText}
-        {priorityBtn}
-        {priorityMenuElt}
+        <div className={styles.row}>
+          <button className={checkClasses} onClick={this.onToggleTodo} />
+          {todoText}
+          <PriorityButton
+            handleClick={this.onPriorityClick}
+            positionClass={styles.priority}
+            priorityValue={priority}
+          />
+          {priorityMenuElt}
+        </div>
+        <div className={styles.row}>{dateElt}</div>
       </li>
     );
   }
@@ -138,15 +149,17 @@ export default class TodoItem extends React.Component<Props, State> {
     });
   }
 
-  onSave() {
+  onSave(e: Event) {
     const { id, handleUpdateTodoText } = this.props;
     const { todoValue } = this.state;
 
-    this.setState({
-      isEditingTodo: false
-    });
+    if (e.key === "Enter" && todoValue.length !== 0) {
+      this.setState({
+        isEditingTodo: false
+      });
 
-    handleUpdateTodoText(id, todoValue);
+      handleUpdateTodoText(id, todoValue);
+    }
   }
 
   onPriorityClick() {

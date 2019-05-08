@@ -1,7 +1,7 @@
 .root {
   position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
 
   padding: 0 12px;
   max-height: 0;
@@ -11,6 +11,8 @@
   font-size: 16px;
 
   opacity: 0;
+  border: 2px solid grey;
+  border-radius: 12px;
 
   transition: all 0.5s linear;
 }
@@ -24,15 +26,16 @@
 }
 
 .root-isVisible {
-  max-height: 50px;
-
+  max-height: 88px;
   padding: 12px;
 
   opacity: 1;
 }
 
-.textEdit {
-  width: calc(100% - 100px);
+.row {
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
 }
 
 .text {

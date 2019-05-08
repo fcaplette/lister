@@ -32,20 +32,3 @@
 .priorityDefault {
   color: grey;
 }
-
-.calendar {
-  position: relative;
-  width: 100%;
-}
-
-.datePlaceholder {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-
-  color: #9b9a9a;
-  font-size: 14px;
-
-  pointer-events: none;
-}

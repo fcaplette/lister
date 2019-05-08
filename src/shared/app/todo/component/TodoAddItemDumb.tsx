@@ -1,5 +1,4 @@
 import React from "react";
-import DatePicker from "react-datepicker";
 
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
@@ -7,6 +6,7 @@ import * as priorities from "../../priority/settings/prioritySettings";
 import CalendarTakeover from "../../date/component/CalendarTakeover";
 
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
 
 const styles = require("./TodoAddItem.css");
 
@@ -35,7 +35,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
 
     // Text
     this.onSubmit = this.onSubmit.bind(this);
-    this.onChange = this.onChange.bind(this);
+    this.onTextChange = this.onTextChange.bind(this);
 
     //Priority
     this.onPriorityClick = this.onPriorityClick.bind(this);
@@ -52,10 +52,6 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
       <PriorityList handleClick={this.onSetPriority} />
     );
 
-    const datePlaceholderElt = !currentDate && (
-      <span className={styles.datePlaceholder}>Pick a date</span>
-    );
-
     return (
       <div className={styles.root}>
         <div className={styles.addInputSection}>
@@ -64,7 +60,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             className={styles.addInput}
             type="text"
             placeholder="Add your todo"
-            onChange={this.onChange}
+            onChange={this.onTextChange}
             onKeyDown={this.onSubmit}
           />
           <div className={styles.priority}>
@@ -76,13 +72,10 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
           </div>
           {priorityMenuElt}
         </div>
-        <div className={styles.calendar}>
-          {datePlaceholderElt}
-          <DatePicker
-            selected={this.state.currentDate}
-            onChange={this.onCalendarChange}
-          />
-        </div>
+        <CalendarDatePicker
+          currentDate={currentDate}
+          handleCalendarChange={this.onCalendarChange}
+        />
       </div>
     );
   }
@@ -116,7 +109,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
     });
   }
 
-  onChange(e) {
+  onTextChange(e) {
     this.setState({
       todoText: e.target.value
     });
