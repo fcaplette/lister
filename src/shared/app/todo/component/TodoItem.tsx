@@ -77,6 +77,10 @@ export default class TodoItem extends React.Component<Props, State> {
       [styles["check-isCompleted"]]: isCompleted || isFadingOut
     });
 
+    const dateClasses = classNames(styles.date, {
+      [styles["date-isPast"]]: moment().diff(date, "days") > 0
+    });
+
     // Elements
 
     const priorityMenuElt = isPriorityMenuOpen && (
@@ -98,7 +102,7 @@ export default class TodoItem extends React.Component<Props, State> {
     );
 
     const dateTextElt = date ? (
-      <span className={styles.confirmedDateText} onClick={this.onEditDate}>
+      <span className={dateClasses} onClick={this.onEditDate}>
         {moment(date).format("LL")}
       </span>
     ) : (

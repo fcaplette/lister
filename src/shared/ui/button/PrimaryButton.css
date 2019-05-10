@@ -9,7 +9,7 @@
   font-size: 16px;
   color: #ffffff;
 
-  background-color: #7799ff;
+  background-color: #00a676;
   border: none;
   border-radius: 8px;
 
@@ -19,13 +19,13 @@
 }
 
 .root:hover {
-  background-color: #3366ff;
+  background-color: #a20021;
   transform: scale(1.05);
 }
 
 .root:active {
   color: #cdcdcd;
-  background-color: #2043ad;
+  background-color: #660014;
   transform: scale(1);
 }
 
@@ -34,15 +34,15 @@
 }
 
 .root-isDisabled {
-  background-color: grey;
+  background-color: #81a79c;
   cursor: default;
 }
 
 .root-isDisabled:hover {
-  background-color: grey;
   transform: scale(1);
+  background-color: #81a79c;
 }
 
 .root-isDisabled:active {
-  background-color: grey;
+  background-color: #81a79c;
 }

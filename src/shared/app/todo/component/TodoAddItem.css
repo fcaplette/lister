@@ -5,7 +5,7 @@
   justify-content: flex-start;
   align-items: center;
 
-  border-bottom: 2px solid teal;
+  border-bottom: 4px solid #79b791;
   width: 100%;
   padding: 12px;
   box-sizing: border-box;
@@ -31,6 +31,9 @@
   box-sizing: border-box;
 }
 
+.addInput:active {
+  border-color: #f46985;
+}
 .row {
   display: flex;
   justify-content: space-between;

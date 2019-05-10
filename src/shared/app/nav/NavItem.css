@@ -10,7 +10,7 @@
   /*TODO: change px to rem with calc */
   font-size: 14px;
   font-family: Helvetica, sans-serif;
-  color: #000000;
+  color: #3a3335;
   text-decoration: none;
 
   background-color: var(--navColor);
@@ -22,7 +22,7 @@
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 2px solid #3366ff;
+  border-bottom: 2px solid #00a676;
   transition: 0.5s;
 }
 
