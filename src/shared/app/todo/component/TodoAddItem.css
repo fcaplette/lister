@@ -4,6 +4,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
+  border-bottom: 2px solid teal;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .addInputSection {
@@ -12,8 +17,13 @@
   width: 100%;
 }
 
+.sectionTitle {
+  margin: 4px 0 12px 0;
+}
+
 .addInput {
   width: 100%;
+  margin-bottom: 8px;
   padding: 4px;
   padding-right: 50px;
   min-height: 40px;
@@ -21,9 +31,16 @@
   box-sizing: border-box;
 }
 
+.row {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
 .priority {
   position: absolute;
-  bottom: 6px;
+  bottom: 16px;
   right: 16px;
 
   cursor: pointer;

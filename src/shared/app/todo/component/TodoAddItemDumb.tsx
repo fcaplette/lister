@@ -7,6 +7,7 @@ import CalendarTakeover from "../../date/component/CalendarTakeover";
 
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
+import PrimaryButton from "../../../ui/button/PrimaryButton";
 
 const styles = require("./TodoAddItem.css");
 
@@ -33,8 +34,10 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    // Text
     this.onSubmit = this.onSubmit.bind(this);
+    this.submitTodo = this.submitTodo.bind(this);
+    this.onClickSubmit = this.onClickSubmit.bind(this);
+    // Text
     this.onTextChange = this.onTextChange.bind(this);
 
     //Priority
@@ -46,7 +49,12 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   }
 
   render() {
-    const { isPriorityMenuOpen, isCalendarShown, currentDate } = this.state;
+    const {
+      isPriorityMenuOpen,
+      isCalendarShown,
+      currentDate,
+      todoText
+    } = this.state;
     // Elements
     const priorityMenuElt = isPriorityMenuOpen && (
       <PriorityList handleClick={this.onSetPriority} />
@@ -59,7 +67,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             value={this.state.todoText}
             className={styles.addInput}
             type="text"
-            placeholder="Add your todo"
+            placeholder="Describe your task"
             onChange={this.onTextChange}
             onKeyDown={this.onSubmit}
           />
@@ -72,25 +80,32 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
           </div>
           {priorityMenuElt}
         </div>
-        <CalendarDatePicker
-          currentDate={currentDate}
-          handleCalendarChange={this.onCalendarChange}
-        />
+        <div className={styles.row}>
+          <CalendarDatePicker
+            currentDate={currentDate}
+            handleCalendarChange={this.onCalendarChange}
+          />
+          <PrimaryButton
+            handleClick={this.onClickSubmit}
+            isDisabled={todoText.length === 0}
+          >
+            Add
+          </PrimaryButton>
+        </div>
       </div>
     );
   }
 
   onSubmit(e: KeyboardEvent) {
-    const { todoText, currentPriority, currentDate } = this.state;
+    const { todoText } = this.state;
 
     if (e.key === "Enter" && todoText.length !== 0) {
-      this.props.handleClick(todoText, currentPriority, currentDate);
-      this.setState({
-        todoText: "",
-        currentPriority: priorities.MEDIUM,
-        currentDate: ""
-      });
+      this.submitTodo();
     }
+  }
+
+  onClickSubmit() {
+    this.submitTodo();
   }
 
   onPriorityClick() {
@@ -118,6 +133,18 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
   onCalendarChange(date: Date) {
     this.setState({
       currentDate: date
+    });
+  }
+
+  submitTodo() {
+    const { todoText, currentPriority, currentDate } = this.state;
+
+    this.props.handleClick(todoText, currentPriority, currentDate);
+
+    this.setState({
+      todoText: "",
+      currentPriority: priorities.MEDIUM,
+      currentDate: ""
     });
   }
 }

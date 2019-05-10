@@ -16,10 +16,11 @@ interface Props {
   text: string;
   isCompleted: boolean;
   priority: number;
-  date: Date;
+  date?: Date;
   handleToggleTodo: (id: number) => void;
   handleUpdateTodoText: (id: number, text: string) => void;
   handleUpdateTodoPriority: (id: number, priorityValue: number) => void;
+  handleUpdateTodoDate: (id: number, date: Date) => void;
   visibilityFilter: string;
 }
 
@@ -45,8 +46,13 @@ export default class TodoItem extends React.Component<Props, State> {
 
     this.onToggleTodo = this.onToggleTodo.bind(this);
     this.onUpdateTodo = this.onUpdateTodo.bind(this);
+
     this.onPriorityClick = this.onPriorityClick.bind(this);
     this.onUpdatePriority = this.onUpdatePriority.bind(this);
+
+    this.onCalendarChange = this.onCalendarChange.bind(this);
+    this.onEditDate = this.onEditDate.bind(this);
+
     this.onChangeText = this.onChangeText.bind(this);
     this.onSave = this.onSave.bind(this);
   }
@@ -91,13 +97,23 @@ export default class TodoItem extends React.Component<Props, State> {
       </span>
     );
 
+    const dateTextElt = date ? (
+      <span className={styles.confirmedDateText} onClick={this.onEditDate}>
+        {moment(date).format("LL")}
+      </span>
+    ) : (
+      <span className={styles.emptyDateText} onClick={this.onEditDate}>
+        Add a date
+      </span>
+    );
+
     const dateElt = isEditingDate ? (
       <CalendarDatePicker
         currentDate={date}
         handleCalendarChange={this.onCalendarChange}
       />
     ) : (
-      <span className={styles.text}>{moment(date).format("MM/DD/YYYY")}</span>
+      dateTextElt
     );
 
     return (
@@ -177,5 +193,19 @@ export default class TodoItem extends React.Component<Props, State> {
     handleUpdateTodoPriority(id, priority);
 
     this.setState({ isPriorityMenuOpen: false });
+  }
+
+  onEditDate() {
+    this.setState({
+      isEditingDate: true
+    });
+  }
+
+  onCalendarChange(date: Date) {
+    const { id, handleUpdateTodoDate } = this.props;
+
+    handleUpdateTodoDate(id, date);
+
+    this.setState({ isEditingDate: false });
   }
 }

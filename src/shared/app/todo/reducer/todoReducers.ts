@@ -10,6 +10,8 @@ const todosReducer = (state = [], action: Object) => {
       return state.map((todo: Object) => todoReducer(todo, action));
     case types.UPDATE_TODO_PRIORITY:
       return state.map((todo: Object) => todoReducer(todo, action));
+    case types.UPDATE_TODO_DATE:
+      return state.map((todo: Object) => todoReducer(todo, action));
     default:
       return state;
   }
@@ -54,6 +56,16 @@ const todoReducer = (state: Object, action: Object) => {
       return {
         ...state,
         priority: action.priority
+      };
+
+    case types.UPDATE_TODO_DATE:
+      if (state.id !== action.id) {
+        return state;
+      }
+
+      return {
+        ...state,
+        date: action.date
       };
   }
 };

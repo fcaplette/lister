@@ -19,7 +19,7 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
     const { currentDate, handleCalendarChange } = this.props;
 
     const datePlaceholderElt = !currentDate && (
-      <span className={styles.datePlaceholder}>Pick a date</span>
+      <span className={styles.datePlaceholder}>Pick a date (optional)</span>
     );
 
     return (

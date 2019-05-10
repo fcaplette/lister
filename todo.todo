@@ -12,10 +12,10 @@
 ✔ Add Dropdown menu to set priority @done(19-04-23 07:16)
 ✔ Add tests for redux state @done(19-04-24 07:26)
 ✔ Create Text input @done(19-04-17 07:26)
-☐ Add Ability to set a due date
-☐ Add warning when a todo is past
+✔ Add Ability to set a due date @done(19-05-10 07:34)
+☐ Add warning when a todo is past (date becomes red)
 ✔ Add ability to set a priority @done(19-04-23 07:17)
-☐ Add sections for each date
+✘ Add sections for each date @cancelled(19-05-10 07:34)
 ✔ Sort each section by priority @done(19-04-23 07:17)
 ✔ Move the nav center on desktop @done(19-04-24 07:14)
 ✔ Handle enter inputs @done(19-04-23 07:17)
@@ -26,6 +26,14 @@
 ✔ Create Signup page @done(19-04-24 07:14)
 ✔ Add logout option in menu @done(19-04-24 07:14)
 ☐ Add logic to allow user to logout
+☐ Update the colors of the app
+☐ Make each item in the list have more spacing
+☐ Fix animation when completing a todo
+☐ Fix date being invalid when not adding one to a todo
+☐ Add ability to edit the date
+☐ Update fonts of the app
+☐ Change the h3 styling (create a component for sectionHeader)
+☐ Handle yesterday, today and tomorrow
 
 
 

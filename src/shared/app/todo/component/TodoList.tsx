@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import {
   toggleTodo,
   updateTodoText,
-  updateTodoPriority
+  updateTodoPriority,
+  updateTodoDate
 } from "../action/todoActions";
 import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
 import { getVisibleTodos, sortTodosByPriority } from "../util/todoUtils";
@@ -32,6 +33,9 @@ const mapDispatchToProps = (dispatch: any): Object => {
     },
     handleUpdateTodoPriority(id: number, priority: number) {
       dispatch(updateTodoPriority(id, priority));
+    },
+    handleUpdateTodoDate(id: number, date: Date) {
+      dispatch(updateTodoDate(id, date));
     }
   };
 };

@@ -35,6 +35,7 @@
 
 .root-isDisabled {
   background-color: grey;
+  cursor: default;
 }
 
 .root-isDisabled:hover {

@@ -3,6 +3,7 @@ import * as React from "react";
 import TodoItem from "./TodoItem";
 import TodoAddItem from "./TodoAddItem";
 import EmptySectionText from "../../../ui/text/EmptySectionText";
+import VisibilityFilter from "./VisibilityFilter";
 
 const styles = require("./TodoList.css");
 
@@ -11,6 +12,7 @@ interface Props {
   handleToggleTodo: (id: number) => void;
   handleUpdateTodoText: (id: number, text: string) => void;
   handleUpdateTodoPriority: (id: number, priority: number) => void;
+  handleUpdateTodoDate: (id: number, date: Date) => void;
   visibilityFilter: string;
 }
 
@@ -25,6 +27,7 @@ export default class TodoList extends React.Component<Props> {
       handleToggleTodo,
       handleUpdateTodoText,
       handleUpdateTodoPriority,
+      handleUpdateTodoDate,
       visibilityFilter
     } = this.props;
 
@@ -46,38 +49,20 @@ export default class TodoList extends React.Component<Props> {
 
       activeTodosElt = activeTodos.map((todo: Object) => (
         <React.Fragment key={todo.id}>
-          <TodoItem
-            {...todo}
-            handleToggleTodo={handleToggleTodo}
-            handleUpdateTodoText={handleUpdateTodoText}
-            handleUpdateTodoPriority={handleUpdateTodoPriority}
-            visibilityFilter={visibilityFilter}
-          />
+          <TodoItem {...todo} {...this.props} />
         </React.Fragment>
       ));
 
       completedTodosElt = completedTodos.map((todo: Object) => (
         <React.Fragment key={todo.id}>
-          <TodoItem
-            {...todo}
-            handleToggleTodo={handleToggleTodo}
-            handleUpdateTodoText={handleUpdateTodoText}
-            handleUpdateTodoPriority={handleUpdateTodoPriority}
-            visibilityFilter={visibilityFilter}
-          />
+          <TodoItem {...todo} {...this.props} />
         </React.Fragment>
       ));
     } else {
       todosElt = todos.length ? (
         todos.map((todo: Object) => (
           <React.Fragment key={todo.id}>
-            <TodoItem
-              {...todo}
-              handleToggleTodo={handleToggleTodo}
-              handleUpdateTodoText={handleUpdateTodoText}
-              handleUpdateTodoPriority={handleUpdateTodoPriority}
-              visibilityFilter={visibilityFilter}
-            />
+            <TodoItem {...todo} {...this.props} />
           </React.Fragment>
         ))
       ) : (
@@ -111,7 +96,7 @@ export default class TodoList extends React.Component<Props> {
 
     return (
       <div className={styles.root}>
-        <TodoAddItem />
+        <VisibilityFilter />
         {todoSection}
       </div>
     );
