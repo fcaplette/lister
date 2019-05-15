@@ -8,7 +8,10 @@ import {
   updateTodoDate
 } from "../action/todoActions";
 import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
-import { getVisibleTodos, sortTodosByPriority } from "../util/todoUtils";
+import {
+  getVisibleTodos,
+  sortTodosByDatesAndPriority
+} from "../util/todoUtils";
 
 import TodoListDumb from "./TodoListDumb";
 
@@ -18,7 +21,7 @@ const mapStateToProps = (state: Object): Object => {
 
   return {
     //TODO: Sort todos by day, and then priority in each day
-    todos: sortTodosByPriority(visibleTodos),
+    todos: sortTodosByDatesAndPriority(visibleTodos),
     visibilityFilter
   };
 };

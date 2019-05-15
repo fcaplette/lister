@@ -20,10 +20,6 @@
   background-color: #d8d8d8;
 }
 
-.root:hover {
-  background-color: #c0bfbf;
-}
-
 .root-isVisible {
   min-height: 108px;
   max-height: 108px;
@@ -78,6 +74,10 @@
   transition: 0.3s;
 }
 
+.date:hover {
+  background-color: #157459;
+}
+
 .emptyDateText {
   position: absolute;
   bottom: 4px;
@@ -94,13 +94,16 @@
   transition: 0.3s;
 }
 
-.emptyDateText:hover,
-.date:hover {
-  color: #296e43;
+.emptyDateText:hover {
+  color: #3a3335;
 }
 
 .date-isPast {
-  color: red;
+  background-color: #ff2b2b;
+}
+
+.date-isPast:hover {
+  background-color: #ac1919;
 }
 
 .check {

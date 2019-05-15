@@ -1,3 +1,5 @@
+import { DateTime, Duration } from "luxon";
+
 import * as consts from "../constant/todoConstants";
 
 export const getVisibleTodos = (todos, filter) => {
@@ -13,9 +15,28 @@ export const getVisibleTodos = (todos, filter) => {
   }
 };
 
-export const sortTodosByPriority = (todos: Array<Object>) => {
+export const sortTodosByDatesAndPriority = (todos: Array<Object>) => {
   if (todos.length) {
-    return todos.sort((todo, todo2) => todo.priority - todo2.priority);
+    const sortedTodos = todos.sort((todo, todo2) => {
+      if (todo.date && todo2.date) {
+        const dateRound1 = DateTime.fromJSDate(todo.date).startOf("day");
+        const dateRound2 = DateTime.fromJSDate(todo2.date).startOf("day");
+
+        const differenceInDays = dateRound1.diff(dateRound2).as("days");
+
+        if (differenceInDays === 0) {
+          return todo.priority - todo2.priority;
+        } else {
+          return differenceInDays;
+        }
+      } else if (todo.date) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    return sortedTodos;
   }
 
   return todos;

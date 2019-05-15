@@ -31,9 +31,6 @@
   box-sizing: border-box;
 }
 
-.addInput:active {
-  border-color: #f46985;
-}
 .row {
   display: flex;
   justify-content: space-between;
