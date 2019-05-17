@@ -8,6 +8,7 @@ interface Props {
   positionClass?: string;
   isFocused?: boolean;
   handleChange: (value: string) => void;
+  handleClose?: () => void;
   placeholder?: string;
 }
 
@@ -77,5 +78,7 @@ export default class TextInput extends React.Component<Props, State> {
     this.setState({
       isActive: false
     });
+
+    this.props.handleClose();
   }
 }

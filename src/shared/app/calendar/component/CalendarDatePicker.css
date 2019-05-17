@@ -14,3 +14,9 @@
 
   pointer-events: none;
 }
+
+.closeBtn {
+  position: absolute;
+  left: 150px;
+  top: 12px;
+}

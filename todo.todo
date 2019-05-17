@@ -14,7 +14,7 @@
 ✔ Create Text input @done(19-04-17 07:26)
 ✔ Add Ability to set a due date @done(19-05-10 07:34)
 ✔ Add warning when a todo is past (date becomes red) @done(19-05-10 16:23)
-☐ Sort by date and priority
+✔ Sort by date and priority @done(19-05-15 08:34)
 ✔ Add ability to set a priority @done(19-04-23 07:17)
 ✘ Add sections for each date @cancelled(19-05-10 07:34)
 ✔ Sort each section by priority @done(19-04-23 07:17)
@@ -23,18 +23,22 @@
 ✔ Animate the list when one element is completed @done(19-04-14 14:20)
 ✔ Make list scrolable (Fix height + scroll) @done(19-05-10 15:46)
 ☐ Refactor state so that todo id is the key to an object
+✔ Add Tests for function sort by priority @done(19-05-17 08:04)
 ✔ Create Login page @done(19-04-24 07:14)
 ✔ Create Signup page @done(19-04-24 07:14)
 ✔ Add logout option in menu @done(19-04-24 07:14)
-☐ Add logic to allow user to logout
-☐ Update the colors of the app
+✔ Add logic to allow user to logout @done(19-05-17 08:04)
+✔ Handle focus out of inputs leave edit mode @done(19-05-17 07:35)
+✔ Update the colors of the app @done(19-05-15 08:34)
 ✔ Make each item in the list have more spacing @done(19-05-10 15:46)
-☐ Fix animation when completing a todo
+✔ Fix animation when completing a todo @done(19-05-15 08:34)
 ✔ Fix date being invalid when not adding one to a todo @done(19-05-10 15:46)
 ✔ Add ability to edit the date @done(19-05-10 15:46)
-☐ Update fonts of the app
-☐ Change the h3 styling (create a component for sectionHeader)
+✔ Update fonts of the app @done(19-05-15 08:34)
+✔ Change the h3 styling (create a component for sectionHeader) @done(19-05-17 07:35)
 ✘ Handle yesterday, today and tomorrow @cancelled(19-05-10 15:46)
+☐ Update style of login
+☐ Update style of signup
 
 
 
@@ -45,7 +49,6 @@ The app witll have 4 routes
     --> /signup      (Cannot be accessed with token, redirect to /)
     --> /            (TODOS live here)
     --> /about       (Open source project, author, etc)
-    --> /preferences (Where user can logout, see information about account, etc) 
 
 The / route will be the main app and the first thing to be developed.
 The initial flow is that upon connected, you will have an empty list of todo (develop empty state)
@@ -58,16 +61,16 @@ to the DB and state (can you store a luxon `Date` value?). You could have a see 
 in which you could set the priority level (potentially also if this todo is recurrent).
 Click enter and your just added your todo.
 
-The Filter menu:
-There will be a filter option with the following state: 
-    --> All
+The Sorting:
     --> By Date
-    --> By State (TODO, COMPLETED)
-    --> By Priority (LOW, MEDIUM, HIGH, URGENT)
+    --> If same date, then by priority
 
-Each todo item can be completed by clicking the circle. And animation checks it and then it is completed.
+Filtering:
+    --> By State (TODO, COMPLETED)
+
+Each todo item can be completed by clicking the circle. An animation checks it and then it is completed.
 You need a setting to decide if you show completed elements. 
 
 The API:
 API will most likely be in python with Flask/Django framework and the DB would be MySQL.
-This would need to live on a different server which mena that it will need to handle CORS (Cross-origin request server).
+This would need to live on a different server which mean that it will need to handle CORS (Cross-origin request server).

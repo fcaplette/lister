@@ -52,6 +52,7 @@ export default class TodoItem extends React.Component<Props, State> {
 
     this.onCalendarChange = this.onCalendarChange.bind(this);
     this.onEditDate = this.onEditDate.bind(this);
+    this.onCloseCalendar = this.onCloseCalendar.bind(this);
 
     this.onChangeText = this.onChangeText.bind(this);
     this.onSave = this.onSave.bind(this);
@@ -70,7 +71,8 @@ export default class TodoItem extends React.Component<Props, State> {
     // Classes
 
     const rootClasses = classNames(styles.root, {
-      [styles["root-isVisible"]]: !isFadingOut || visibilityFilter === SHOW_ALL
+      [styles["root-isVisible"]]: !isFadingOut || visibilityFilter === SHOW_ALL,
+      [styles["root-isCompleted"]]: isCompleted
     });
 
     const checkClasses = classNames(styles.check, {
@@ -92,6 +94,7 @@ export default class TodoItem extends React.Component<Props, State> {
         <TextInput
           value={todoValue}
           handleChange={this.onChangeText}
+          handleClose={this.onSave}
           isFocused
         />
       </div>
@@ -115,6 +118,7 @@ export default class TodoItem extends React.Component<Props, State> {
       <CalendarDatePicker
         currentDate={date}
         handleCalendarChange={this.onCalendarChange}
+        handleClose={this.onCloseCalendar}
       />
     ) : (
       dateTextElt
@@ -173,7 +177,10 @@ export default class TodoItem extends React.Component<Props, State> {
     const { id, handleUpdateTodoText } = this.props;
     const { todoValue } = this.state;
 
-    if (e.key === "Enter" && todoValue.length !== 0) {
+    if (
+      (e && e.key === "Enter" && todoValue.length !== 0) ||
+      (!e && todoValue.length !== 0)
+    ) {
       this.setState({
         isEditingTodo: false
       });
@@ -199,9 +206,17 @@ export default class TodoItem extends React.Component<Props, State> {
     this.setState({ isPriorityMenuOpen: false });
   }
 
+  // Calendar
+
   onEditDate() {
     this.setState({
       isEditingDate: true
+    });
+  }
+
+  onCloseCalendar() {
+    this.setState({
+      isEditingDate: false
     });
   }
 

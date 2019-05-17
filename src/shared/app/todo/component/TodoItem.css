@@ -28,6 +28,10 @@
   opacity: 1;
 }
 
+.root-isCompleted {
+  opacity: 0.5;
+}
+
 .row {
   display: flex;
   align-items: center;
@@ -121,7 +125,7 @@
 }
 
 .check-isCompleted {
-  background-color: #f46985;
+  background-color: #00a676;
 }
 
 .save {
