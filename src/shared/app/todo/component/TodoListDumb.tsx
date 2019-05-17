@@ -66,7 +66,7 @@ export default class TodoList extends React.Component<Props> {
           </React.Fragment>
         ))
       ) : (
-        <EmptySectionText children={"No TODOS"} />
+        <EmptySectionText children={"You are done!"} />
       );
     }
 

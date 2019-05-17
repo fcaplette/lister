@@ -19,13 +19,13 @@
 }
 
 .root:hover {
-  background-color: #a20021;
+  background-color: #007a58;
   transform: scale(1.05);
 }
 
 .root:active {
   color: #cdcdcd;
-  background-color: #660014;
+  background-color: #00553d;
   transform: scale(1);
 }
 
