@@ -1,29 +1,58 @@
 import * as types from "./signupActionTypes";
+import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 
 import { signupEndpoint } from "../../../domain/api/endpoints";
 
-export const signupPost = (email: string, password: string): Object => {
-  const params = { email, password };
+export function registerUser(email, password): Object {
+  return dispatch => {
+    dispatch(registerUserRequest());
 
-  //TODO: Implement logic to call api with redux-thunk
-  fetch(signupEndpoint);
-};
+    return fetch(signupEndpoint, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
 
-export const signupPostRequest = (): Object => {
+        if (getResponseErrorMessage(json)) {
+          console.log("API error");
+
+          throw getResponseErrorMessage(json);
+        } else {
+          return dispatch(registerUserSuccess());
+        }
+      })
+      .catch(exception => {
+        if (typeof exception === "string") {
+          dispatch(registerUserFailure(exception));
+        } else {
+          dispatch(registerUserFailure("Something went wrong"));
+        }
+        throw exception;
+      });
+  };
+}
+
+export const registerUserRequest = (): Object => {
   return {
-    type: types.SIGNUP_REQUEST
+    type: types.REGISTER_USER_REQUEST
   };
 };
 
-export const signupPostSuccess = (): Object => {
+export const registerUserSuccess = (): Object => {
   return {
-    type: types.SIGNUP_SUCCESS
+    type: types.REGISTER_USER_SUCCESS
   };
 };
 
-export const signupPostFailure = (exception: string): Object => {
+export const registerUserFailure = (exception: string): Object => {
   return {
-    type: types.SIGNUP_FAILURE,
+    type: types.REGISTER_USER_FAILURE,
     exception
   };
 };

@@ -6,6 +6,7 @@ const styles = require("../../login/component/LoginForm.css");
 
 interface Props {
   handleSubmit: (email: string, password: string) => void;
+  submitError: string;
 }
 
 interface State {
@@ -33,6 +34,7 @@ class SignupFormDumb extends React.Component<Props, State> {
   }
 
   render() {
+    const { submitError } = this.props;
     const {
       currentEmail,
       currentPassword,
@@ -42,6 +44,9 @@ class SignupFormDumb extends React.Component<Props, State> {
 
     // Elements
     const errorElt = error && <span className={styles.error}>{error}</span>;
+    const submitErrorElt = submitError && (
+      <span className={styles.error}>{submitError}</span>
+    );
 
     return (
       <form className={styles.root}>
@@ -54,6 +59,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             onChange={this.onEmailChange}
             value={currentEmail}
           />
+          {submitErrorElt}
         </div>
         <div className={styles.section}>
           <label htmlFor="password">Password </label>
@@ -95,13 +101,15 @@ class SignupFormDumb extends React.Component<Props, State> {
 
   onPasswordChange(e: Event) {
     this.setState({
-      currentPassword: e.target.value
+      currentPassword: e.target.value,
+      error: ""
     });
   }
 
   onConfirmPasswordChange(e: Event) {
     this.setState({
-      currentConfirmPassword: e.target.value
+      currentConfirmPassword: e.target.value,
+      error: ""
     });
   }
 

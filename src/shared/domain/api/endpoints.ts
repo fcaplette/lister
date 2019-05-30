@@ -1,5 +1,5 @@
-const apiUrl = "https://api.fodo.com";
+const apiUrl = "http://localhost:5000";
 
-export const loginEndpoint = `${apiUrl}/login`;
-export const signupEndpoint = `${apiUrl}/signup`;
-export const todosEndpoint = `${apiUrl}/todos`;
+export const loginEndpoint = `${apiUrl}/login/`;
+export const signupEndpoint = `${apiUrl}/signup/`;
+export const todosEndpoint = `${apiUrl}/todos/`;
