@@ -26,6 +26,9 @@
 
 .input {
   margin-top: 8px;
+  padding: 6px;
+
+  border: none;
 }
 
 .submitBtn {

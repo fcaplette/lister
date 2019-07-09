@@ -17,11 +17,7 @@ export function registerUser(email, password): Object {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
-
         if (getResponseErrorMessage(json)) {
-          console.log("API error");
-
           throw getResponseErrorMessage(json);
         } else {
           return dispatch(registerUserSuccess());

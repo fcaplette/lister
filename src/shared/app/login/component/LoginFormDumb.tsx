@@ -28,7 +28,11 @@ class LoginFormDumb extends React.Component<Props, State> {
   }
 
   render() {
-    const { currentEmail, currentPassword } = this.props;
+    const { currentEmail, currentPassword, submitError } = this.props;
+
+    const submitErrorElt = submitError && (
+      <span className={styles.error}>{submitError}</span>
+    );
 
     return (
       <form className={styles.root}>
@@ -51,6 +55,7 @@ class LoginFormDumb extends React.Component<Props, State> {
             onChange={this.onPasswordChange}
             value={currentPassword}
           />
+          {submitErrorElt}
         </div>
         <DiscreteLink href="/signup">Don't have an account?</DiscreteLink>
         <PrimaryButton

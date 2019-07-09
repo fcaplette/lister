@@ -3,9 +3,12 @@ import { compose } from "ramda";
 
 import LoginFormDumb from "./LoginFormDumb";
 import { loginPost } from "../action/loginActions";
+import { getLoginError } from "../selector/loginSelectors";
 
 const mapStateToProps = (state: Object): Object => {
-  return { ...state };
+  return {
+    submitError: getLoginError(state)
+  };
 };
 
 const mapDispatchToProps = (dispatch: any): Object => ({
