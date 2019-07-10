@@ -31,6 +31,35 @@ class SignupFormDumb extends React.Component<Props, State> {
     this.onEmailChange = this.onEmailChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this);
+
+    this.emailRef = React.createRef();
+    this.passwordRef = React.createRef();
+    this.confirmPasswordRef = React.createRef();
+  }
+
+  componentDidMount() {
+    // Required for browser autofill
+    const domEmailValue = this.emailRef.current.value;
+    const domPasswordValue = this.passwordRef.current.value;
+    const domConfirmPasswordValue = this.confirmPasswordRef.current.value;
+
+    if (domEmailValue !== this.state.currentEmail) {
+      this.setState({
+        currentEmail: domEmailValue
+      });
+    }
+
+    if (domPasswordValue !== this.state.currentPassword) {
+      this.setState({
+        currentPassword: domPasswordValue
+      });
+    }
+
+    if (domConfirmPasswordValue !== this.state.currentConfirmPassword) {
+      this.setState({
+        currentConfirmPassword: domConfirmPasswordValue
+      });
+    }
   }
 
   render() {
@@ -58,6 +87,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             type="email"
             onChange={this.onEmailChange}
             value={currentEmail}
+            ref={this.emailRef}
           />
           {submitErrorElt}
         </div>
@@ -69,6 +99,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             type="password"
             onChange={this.onPasswordChange}
             value={currentPassword}
+            ref={this.passwordRef}
           />
         </div>
         <div className={styles.section}>
@@ -86,6 +117,7 @@ class SignupFormDumb extends React.Component<Props, State> {
         <PrimaryButton
           positionClass={styles.submitBtn}
           handleClick={this.onSubmit}
+          ref={this.confirmPasswordRef}
         >
           Register
         </PrimaryButton>
