@@ -20,7 +20,12 @@ export const loginPost = (email: string, password: string): Object => {
         if (getResponseErrorMessage(json)) {
           throw getResponseErrorMessage(json);
         } else {
-          return dispatch(loginPostSuccess());
+          if (document && json.access_token) {
+            document.cookie = `access_token=${json.access_token}`;
+            return dispatch(loginPostSuccess());
+          } else {
+            dispatch(loginPostFailure());
+          }
         }
       })
       .catch(exception => {
