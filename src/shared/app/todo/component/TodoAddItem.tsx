@@ -2,16 +2,29 @@ import { compose } from "ramda";
 import { connect } from "react-redux";
 
 import TodoAddItemDumb from "./TodoAddItemDumb";
-import { addTodo } from "../action/todoActions";
+import { postTodo } from "../action/todoActions";
+import { getUserID } from "../../../domain/user/selector/userSelectors";
 
 const mapStateToProps = (state: Object): Object => {
-  return { ...state };
+  return {
+    userID: getUserID(state)
+  };
 };
 
-const mapDispatchToProps = (dispatch: any): Object => {
+const mapDispatchToProps = (dispatch: any): Object => ({ dispatch });
+
+const mergeProps = (stateProps: Object, { dispatch }: Object): Object => {
+  const { userID } = stateProps;
+
   return {
-    handleClick(todo: string, priority: number, date: Date | null) {
-      dispatch(addTodo(todo, priority, date));
+    ...stateProps,
+    handleClick(text: string, priority: number, date: Date | null) {
+      let ISODate = "";
+      if (date) {
+        ISODate = date.toISOString();
+      }
+
+      dispatch(postTodo(text, priority, ISODate, userID));
     }
   };
 };
@@ -19,6 +32,7 @@ const mapDispatchToProps = (dispatch: any): Object => {
 export default compose(
   connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
+    mergeProps
   )
 )(TodoAddItemDumb);

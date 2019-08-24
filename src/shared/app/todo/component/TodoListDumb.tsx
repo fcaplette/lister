@@ -8,11 +8,13 @@ import VisibilityFilter from "./VisibilityFilter";
 const styles = require("./TodoList.css");
 
 interface Props {
+  error: boolean;
   todos: Array<Object>;
   handleToggleTodo: (id: number) => void;
   handleUpdateTodoText: (id: number, text: string) => void;
   handleUpdateTodoPriority: (id: number, priority: number) => void;
   handleUpdateTodoDate: (id: number, date: Date) => void;
+  handleRemoveErrorMessage: () => void;
   visibilityFilter: string;
 }
 
@@ -21,8 +23,21 @@ export default class TodoList extends React.Component<Props> {
     super(props);
   }
 
+  componentDidUpdate(prevProps) {
+    const { error, handleRemoveErrorMessage } = this.props;
+
+    if (!prevProps.error && error) {
+      this.errorTimeout = setTimeout(handleRemoveErrorMessage, 3000);
+    }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.errorTimeout);
+  }
+
   render() {
     const {
+      error,
       todos,
       handleToggleTodo,
       handleUpdateTodoText,
@@ -37,6 +52,18 @@ export default class TodoList extends React.Component<Props> {
     let activeTodosElt;
     let completedTodosElt;
     let todosElt;
+    let errorElt;
+
+    // Components
+
+    if (error) {
+      errorElt = (
+        <p className={styles.errorBanner}>
+          There was an error updating your todos. Your last changes will not be
+          saved
+        </p>
+      );
+    }
 
     if (visibilityFilter === "SHOW_ALL" && todos.length) {
       todos.forEach(todo => {
@@ -97,6 +124,7 @@ export default class TodoList extends React.Component<Props> {
     return (
       <div className={styles.root}>
         <VisibilityFilter />
+        {errorElt}
         {todoSection}
       </div>
     );

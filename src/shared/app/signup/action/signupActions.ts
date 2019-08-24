@@ -3,7 +3,7 @@ import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 
 import { signupEndpoint } from "../../../domain/api/endpoints";
 
-export function registerUser(email, password): Object {
+export function registerUser(username, password): Object {
   return dispatch => {
     dispatch(registerUserRequest());
 
@@ -13,12 +13,12 @@ export function registerUser(email, password): Object {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
       .then(json => {
         if (getResponseErrorMessage(json)) {
-          throw getResponseErrorMessage(json);
+          throw new Error(getResponseErrorMessage(json));
         } else {
           return dispatch(registerUserSuccess());
         }

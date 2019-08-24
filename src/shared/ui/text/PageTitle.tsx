@@ -10,5 +10,7 @@ interface Props {
 }
 
 export default ({ positionClass, children }: Props) => (
-  <div className={classNames(styles.root, positionClass)}>{children}</div>
+  <div className={classNames(styles["pagetitle-root"], positionClass)}>
+    {children}
+  </div>
 );

@@ -16,7 +16,7 @@ interface Props {
   text: string;
   isCompleted: boolean;
   priority: number;
-  date?: Date;
+  date?: string;
   handleToggleTodo: (id: number) => void;
   handleUpdateTodoText: (id: number, text: string) => void;
   handleUpdateTodoPriority: (id: number, priorityValue: number) => void;
@@ -116,7 +116,7 @@ export default class TodoItem extends React.Component<Props, State> {
 
     const dateElt = isEditingDate ? (
       <CalendarDatePicker
-        currentDate={date}
+        currentDate={moment(date, "YYYY-MM-DD").toDate()}
         handleCalendarChange={this.onCalendarChange}
         handleClose={this.onCloseCalendar}
       />

@@ -3,6 +3,8 @@ import * as React from "react";
 
 import NavItem from "./NavItem";
 import NavCollapsed from "./NavCollapsed";
+import { deleteCookie } from "../base/browser/browserUtils";
+import { accessToken } from "../login/settings/loginSettings";
 import CloseButton from "../../ui/button/CloseButton";
 
 const styles = require("./Nav.css");
@@ -22,7 +24,8 @@ export default class Nav extends React.Component<Props, State> {
     };
 
     const self: any = this;
-    self.onClick = this.onClick.bind(this);
+    self.onCloseBtnClick = this.onCloseBtnClick.bind(this);
+    self.onLogout = this.onLogout.bind(this);
   }
 
   render() {
@@ -32,7 +35,7 @@ export default class Nav extends React.Component<Props, State> {
     // Elements
 
     if (isCollapsed) {
-      return <NavCollapsed handleClick={this.onClick} />;
+      return <NavCollapsed handleClick={this.onCloseBtnClick} />;
     } else {
       return (
         <div className={styles.root}>
@@ -40,18 +43,25 @@ export default class Nav extends React.Component<Props, State> {
           <div className={styles.nav}>
             <CloseButton
               positionClass={styles.closeBtn}
-              handleClick={this.onClick}
+              handleClick={this.onCloseBtnClick}
             />
             <NavItem href="/">Home</NavItem>
             <NavItem href="/about">About</NavItem>
-            <NavItem href="/login">Logout</NavItem>
+            <NavItem handleClick={this.onLogout}>Logout</NavItem>
           </div>
         </div>
       );
     }
   }
 
-  onClick() {
+  onCloseBtnClick() {
     this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }));
+  }
+
+  onLogout() {
+    if (document) {
+      deleteCookie(accessToken);
+      location.reload();
+    }
   }
 }

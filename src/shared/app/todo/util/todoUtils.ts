@@ -19,8 +19,8 @@ export const sortTodosByDatesAndPriority = (todos: Array<Object>) => {
   if (todos.length) {
     const sortedTodos = todos.sort((todo, todo2) => {
       if (todo.date && todo2.date) {
-        const dateRound1 = DateTime.fromJSDate(todo.date).startOf("day");
-        const dateRound2 = DateTime.fromJSDate(todo2.date).startOf("day");
+        const dateRound1 = DateTime.fromISO(todo.date).startOf("day");
+        const dateRound2 = DateTime.fromISO(todo2.date).startOf("day");
 
         const differenceInDays = dateRound1.diff(dateRound2).as("days");
 

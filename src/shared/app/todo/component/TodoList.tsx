@@ -5,29 +5,47 @@ import {
   toggleTodo,
   updateTodoText,
   updateTodoPriority,
-  updateTodoDate
+  updateTodoDate,
+  resetTodoError
 } from "../action/todoActions";
-import { getVisibilityFilter, getTodos } from "../selector/todoSelectors";
+import {
+  getVisibilityFilter,
+  getTodos,
+  getTodoError
+} from "../selector/todoSelectors";
 import {
   getVisibleTodos,
   sortTodosByDatesAndPriority
 } from "../util/todoUtils";
+import withMount from "../../base/hoc/withMount";
 
 import TodoListDumb from "./TodoListDumb";
+import { fetchUser } from "../../../domain/user/action/userActions";
+import { getUserName } from "../../../domain/user/selector/userSelectors";
 
 const mapStateToProps = (state: Object): Object => {
   const visibilityFilter = getVisibilityFilter(state);
   const visibleTodos = getVisibleTodos(getTodos(state), visibilityFilter);
 
   return {
-    //TODO: Sort todos by day, and then priority in each day
+    error: getTodoError(state),
     todos: sortTodosByDatesAndPriority(visibleTodos),
-    visibilityFilter
+    visibilityFilter,
+    // merge
+    username: getUserName(state)
   };
 };
 
-const mapDispatchToProps = (dispatch: any): Object => {
+const mapDispatchToProps = (dispatch: any): Object => ({ dispatch });
+
+const mergeProps = (stateProps: Object, { dispatch }: Object): Object => {
+  const { username } = stateProps;
+
   return {
+    ...stateProps,
+    handleMount() {
+      dispatch(fetchUser(username));
+    },
     handleToggleTodo(id: number) {
       dispatch(toggleTodo(id));
     },
@@ -39,6 +57,9 @@ const mapDispatchToProps = (dispatch: any): Object => {
     },
     handleUpdateTodoDate(id: number, date: Date) {
       dispatch(updateTodoDate(id, date));
+    },
+    handleRemoveErrorMessage() {
+      dispatch(resetTodoError());
     }
   };
 };
@@ -46,6 +67,8 @@ const mapDispatchToProps = (dispatch: any): Object => {
 export default compose(
   connect(
     mapStateToProps,
-    mapDispatchToProps
-  )
+    mapDispatchToProps,
+    mergeProps
+  ),
+  withMount
 )(TodoListDumb);

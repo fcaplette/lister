@@ -2,8 +2,9 @@ import * as types from "./loginActionTypes";
 
 import { loginEndpoint } from "../../../domain/api/endpoints";
 import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
+import { accessToken } from "../settings/loginSettings";
 
-export const loginPost = (email: string, password: string): Object => {
+export const loginPost = (username: string, password: string): Object => {
   return dispatch => {
     dispatch(loginPostRequest());
 
@@ -13,7 +14,7 @@ export const loginPost = (email: string, password: string): Object => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ username, password })
     })
       .then(response => response.json())
       .then(json => {
@@ -21,8 +22,8 @@ export const loginPost = (email: string, password: string): Object => {
           throw getResponseErrorMessage(json);
         } else {
           if (document && json.access_token) {
-            document.cookie = `access_token=${json.access_token}`;
-            return dispatch(loginPostSuccess());
+            document.cookie = `${accessToken}=${json.access_token}; Path=/;`;
+            return dispatch(loginPostSuccess(username));
           } else {
             dispatch(loginPostFailure());
           }
@@ -45,9 +46,10 @@ export const loginPostRequest = (): Object => {
   };
 };
 
-export const loginPostSuccess = (): Object => {
+export const loginPostSuccess = (username: string): Object => {
   return {
-    type: types.LOGIN_SUCCESS
+    type: types.LOGIN_SUCCESS,
+    username
   };
 };
 

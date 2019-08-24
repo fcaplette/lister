@@ -8,6 +8,24 @@
   text-decoration: none;
 }
 
+.errorBanner {
+  position: fixed;
+  left: 0;
+  top: 14px;
+  display: flex;
+  justify-content: center;
+  z-index: 4;
+
+  padding: 12px;
+  margin: 8px;
+
+  font-size: 14px;
+  color: white;
+
+  background-color: #ac1919;
+  border-radius: 10px;
+}
+
 h3 {
   display: flex;
   justify-content: center;

@@ -22,7 +22,6 @@
 ✔ Handle enter inputs @done(19-04-23 07:17)
 ✔ Animate the list when one element is completed @done(19-04-14 14:20)
 ✔ Make list scrolable (Fix height + scroll) @done(19-05-10 15:46)
-☐ Refactor state so that todo id is the key to an object
 ✔ Add Tests for function sort by priority @done(19-05-17 08:04)
 ✔ Create Login page @done(19-04-24 07:14)
 ✔ Create Signup page @done(19-04-24 07:14)
@@ -37,8 +36,15 @@
 ✔ Update fonts of the app @done(19-05-15 08:34)
 ✔ Change the h3 styling (create a component for sectionHeader) @done(19-05-17 07:35)
 ✘ Handle yesterday, today and tomorrow @cancelled(19-05-10 15:46)
-☐ Update style of login
-☐ Update style of signup
+✔ Update style of login @done(19-08-24 09:50)
+✔ Update style of signup @done(19-08-24 09:50)
+☐ catch error when signup occurs, don't redirect to login
+☐ Refactor state so that todo id is the key to an object
+✔ Logout - Remove cookie @done(19-08-24 13:18)
+✔ Fetch user and todos when in the todoList @done(19-08-24 15:19)
+☐ Patch a todo 
+✔ Post a todo @done(19-08-24 16:54)
+
 
 
 
@@ -72,5 +78,5 @@ Each todo item can be completed by clicking the circle. An animation checks it a
 You need a setting to decide if you show completed elements. 
 
 The API:
-API will most likely be in python with Flask/Django framework and the DB would be MySQL.
+API is in python with Flask framework and the DB is MySQL.
 This would need to live on a different server which mean that it will need to handle CORS (Cross-origin request server).

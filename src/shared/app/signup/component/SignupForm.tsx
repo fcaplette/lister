@@ -31,6 +31,7 @@ const mergeProps = (
           router.push("/login");
         })
         .catch(() => {
+          router.push("/signup");
           // Do nothing
         });
     }

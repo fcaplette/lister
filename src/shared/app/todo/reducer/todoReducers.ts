@@ -1,8 +1,14 @@
 import * as types from "../action/todoActionTypes";
+import * as userTypes from "../../../domain/user/action/userActionTypes";
 
 const todosReducer = (state = [], action: Object) => {
   switch (action.type) {
-    case types.ADD_TODO:
+    case userTypes.FETCH_USER_SUCCESS:
+      if (action && action.todos) {
+        return [...action.todos];
+      }
+      return [...state];
+    case types.ADD_TODO_OPTIMISTICALLY:
       return [...state, todoReducer(undefined, action)];
     case types.TOGGLE_TODO:
       return state.map((todo: Object) => todoReducer(todo, action));
@@ -19,7 +25,7 @@ const todosReducer = (state = [], action: Object) => {
 
 const todoReducer = (state: Object, action: Object) => {
   switch (action.type) {
-    case types.ADD_TODO:
+    case types.ADD_TODO_OPTIMISTICALLY:
       return {
         id: action.id,
         text: action.text,
