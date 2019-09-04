@@ -10,10 +10,7 @@ const styles = require("./TodoList.css");
 interface Props {
   error: boolean;
   todos: Array<Object>;
-  handleToggleTodo: (id: number) => void;
-  handleUpdateTodoText: (id: number, text: string) => void;
-  handleUpdateTodoPriority: (id: number, priority: number) => void;
-  handleUpdateTodoDate: (id: number, date: Date) => void;
+  handleTodoChange: (todo: Object) => void;
   handleRemoveErrorMessage: () => void;
   visibilityFilter: string;
 }
@@ -36,15 +33,7 @@ export default class TodoList extends React.Component<Props> {
   }
 
   render() {
-    const {
-      error,
-      todos,
-      handleToggleTodo,
-      handleUpdateTodoText,
-      handleUpdateTodoPriority,
-      handleUpdateTodoDate,
-      visibilityFilter
-    } = this.props;
+    const { error, todos, handleTodoChange, visibilityFilter } = this.props;
 
     const activeTodos: Array<Object> = [];
     const completedTodos: Array<Object> = [];
@@ -67,7 +56,7 @@ export default class TodoList extends React.Component<Props> {
 
     if (visibilityFilter === "SHOW_ALL" && todos.length) {
       todos.forEach(todo => {
-        if (todo.isCompleted) {
+        if (todo.completed) {
           completedTodos.push(todo);
         } else {
           activeTodos.push(todo);
@@ -76,20 +65,20 @@ export default class TodoList extends React.Component<Props> {
 
       activeTodosElt = activeTodos.map((todo: Object) => (
         <React.Fragment key={todo.id}>
-          <TodoItem {...todo} {...this.props} />
+          <TodoItem todo={{ ...todo }} {...this.props} />
         </React.Fragment>
       ));
 
       completedTodosElt = completedTodos.map((todo: Object) => (
         <React.Fragment key={todo.id}>
-          <TodoItem {...todo} {...this.props} />
+          <TodoItem todo={{ ...todo }} {...this.props} />
         </React.Fragment>
       ));
     } else {
       todosElt = todos.length ? (
         todos.map((todo: Object) => (
           <React.Fragment key={todo.id}>
-            <TodoItem {...todo} {...this.props} />
+            <TodoItem todo={{ ...todo }} {...this.props} />
           </React.Fragment>
         ))
       ) : (

@@ -8,10 +8,10 @@ export const getVisibleTodos = (todos, filter) => {
       return todos;
 
     case consts.SHOW_ACTIVE:
-      return todos.filter(todo => !todo.isCompleted);
+      return todos.filter(todo => !todo.completed);
 
     case consts.SHOW_COMPLETED:
-      return todos.filter(todo => todo.isCompleted);
+      return todos.filter(todo => todo.completed);
   }
 };
 

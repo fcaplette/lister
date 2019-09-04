@@ -2,7 +2,8 @@ import * as types from "./userActionTypes";
 import { userEndpoint } from "../../api/endpoints";
 
 export const fetchUser = (
-  username: string = "frederic+1@e-180.com"
+  // TEMP
+  username: string = "frederic@e-180.com"
 ): Array<Object> => {
   return dispatch => {
     dispatch(fetchUserRequest());
@@ -18,7 +19,6 @@ export const fetchUser = (
         dispatch(fetchUserSuccess(json.user_id, json.todos));
       })
       .catch(err => {
-        console.log(err);
         dispatch(fetchUserFailure(err));
       });
   };

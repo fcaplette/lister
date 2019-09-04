@@ -1,4 +1,4 @@
-☐ Change Webpack config for CSS loader to see classnames
+✘ Change Webpack config for CSS loader to see classnames @cancelled(19-09-04 08:12)
 ✔ Implement the state structure + utils to modify the state @done(19-04-14 13:25)
 ✔ Implement Todo components (list and item) @done(19-04-14 13:25)
 ✔ Implement "Add todo" button in TodoMain component @done(19-04-14 13:25)
@@ -39,10 +39,16 @@
 ✔ Update style of login @done(19-08-24 09:50)
 ✔ Update style of signup @done(19-08-24 09:50)
 ☐ catch error when signup occurs, don't redirect to login
-☐ Refactor state so that todo id is the key to an object
 ✔ Logout - Remove cookie @done(19-08-24 13:18)
 ✔ Fetch user and todos when in the todoList @done(19-08-24 15:19)
-☐ Patch a todo 
+✔ Patch a todo to allow it to be completed @done(19-09-04 08:22)
+✔ Patch a todo to allow it to change date @done(19-09-04 08:12)
+✔ Patch a todo to allow it to change text @done(19-09-04 08:12)
+✔ Patch a todo to allow it to change priority @done(19-09-04 08:12)
+☐ Fix Todo complete animation
+☐ get the user ID from the token (store token in DB?)
+☐ Switch DB to be PROD ready
+☐ Handle redirection with NextJs before the rendering if a user is not connected
 ✔ Post a todo @done(19-08-24 16:54)
 
 
@@ -80,3 +86,9 @@ You need a setting to decide if you show completed elements.
 The API:
 API is in python with Flask framework and the DB is MySQL.
 This would need to live on a different server which mean that it will need to handle CORS (Cross-origin request server).
+
+
+Todo => call update from the comp
+
+One event handler that just pass all the value to the action. 
+Then the action pass all of that to the API, doesn't know what changed.

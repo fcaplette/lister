@@ -31,7 +31,7 @@ const todoReducer = (state: Object, action: Object) => {
         text: action.text,
         priority: action.priority,
         date: action.date,
-        isCompleted: false
+        completed: false
       };
 
     case types.TOGGLE_TODO:
@@ -41,7 +41,7 @@ const todoReducer = (state: Object, action: Object) => {
 
       return {
         ...state,
-        isCompleted: !state.isCompleted
+        completed: !state.completed
       };
 
     case types.UPDATE_TODO_TEXT:

@@ -6,11 +6,11 @@ const stateWithTodo = [
   {
     id: 0,
     text: "Plant a tree",
-    isCompleted: false
+    completed: false
   }
 ];
 const actionAddTodo = {
-  type: types.ADD_TODO,
+  type: types.ADD_TODO_OPTIMISTICALLY,
   id: 0,
   text: "Plant a tree"
 };
@@ -99,22 +99,22 @@ describe("todoReducers", () => {
     const stateWithTodos = [
       {
         id: 0,
-        isCompleted: false
+        completed: false
       },
       {
         id: 1,
-        isCompleted: false
+        completed: false
       }
     ];
 
     const stateWithTodosAfter = [
       {
         id: 0,
-        isCompleted: false
+        completed: false
       },
       {
         id: 1,
-        isCompleted: true
+        completed: true
       }
     ];
 

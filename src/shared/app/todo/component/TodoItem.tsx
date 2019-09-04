@@ -12,15 +12,8 @@ import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
 const styles = require("./TodoItem.css");
 
 interface Props {
-  id: number;
-  text: string;
-  isCompleted: boolean;
-  priority: number;
-  date?: string;
-  handleToggleTodo: (id: number) => void;
-  handleUpdateTodoText: (id: number, text: string) => void;
-  handleUpdateTodoPriority: (id: number, priorityValue: number) => void;
-  handleUpdateTodoDate: (id: number, date: Date) => void;
+  todo: Object; // id, text, completed, priority, date
+  handleTodoChange: (todo: Object) => Object;
   visibilityFilter: string;
 }
 
@@ -34,7 +27,7 @@ interface State {
 
 export default class TodoItem extends React.Component<Props, State> {
   state = {
-    todoValue: this.props.text,
+    todoValue: this.props.todo.text,
     isEditingTodo: false,
     isEditingDate: false,
     isPriorityMenuOpen: false,
@@ -59,7 +52,7 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { id, isCompleted, visibilityFilter, priority, date } = this.props;
+    const { todo, visibilityFilter } = this.props;
     const {
       todoValue,
       isFadingOut,
@@ -67,16 +60,17 @@ export default class TodoItem extends React.Component<Props, State> {
       isEditingDate,
       isPriorityMenuOpen
     } = this.state;
+    const { id, completed, priority, date } = todo;
 
     // Classes
 
     const rootClasses = classNames(styles.root, {
       [styles["root-isVisible"]]: !isFadingOut || visibilityFilter === SHOW_ALL,
-      [styles["root-isCompleted"]]: isCompleted
+      [styles["root-isCompleted"]]: completed
     });
 
     const checkClasses = classNames(styles.check, {
-      [styles["check-isCompleted"]]: isCompleted || isFadingOut
+      [styles["check-isCompleted"]]: completed || isFadingOut
     });
 
     const dateClasses = classNames(styles.date, {
@@ -142,17 +136,17 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onToggleTodo() {
-    const { id, handleToggleTodo, visibilityFilter } = this.props;
+    const { todo, handleTodoChange, visibilityFilter } = this.props;
 
     if (visibilityFilter === SHOW_ALL) {
-      handleToggleTodo(id);
+      handleTodoChange({ ...todo, completed: !todo.completed });
     } else {
       this.setState({
         isFadingOut: true
       });
 
       setTimeout(() => {
-        handleToggleTodo(id);
+        handleTodoChange({ ...todo, completed: !todo.completed });
 
         this.setState({
           isFadingOut: false
@@ -174,7 +168,7 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onSave(e: Event) {
-    const { id, handleUpdateTodoText } = this.props;
+    const { id, handleTodoChange } = this.props;
     const { todoValue } = this.state;
 
     if (
@@ -185,7 +179,7 @@ export default class TodoItem extends React.Component<Props, State> {
         isEditingTodo: false
       });
 
-      handleUpdateTodoText(id, todoValue);
+      handleTodoChange({ ...todo, text: todoValue });
     }
   }
 
@@ -199,9 +193,11 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onUpdatePriority(priority: number) {
-    const { id, handleUpdateTodoPriority } = this.props;
+    const { todo, handleTodoChange } = this.props;
 
-    handleUpdateTodoPriority(id, priority);
+    console.log(priority);
+
+    handleTodoChange({ ...todo, priority });
 
     this.setState({ isPriorityMenuOpen: false });
   }
@@ -221,9 +217,9 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onCalendarChange(date: Date) {
-    const { id, handleUpdateTodoDate } = this.props;
+    const { todo, handleTodoChange } = this.props;
 
-    handleUpdateTodoDate(id, date);
+    handleTodoChange({ ...todo, date: date.toISOString() });
 
     this.setState({ isEditingDate: false });
   }
