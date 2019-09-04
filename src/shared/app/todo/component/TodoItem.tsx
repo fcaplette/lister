@@ -173,7 +173,7 @@ export default class TodoItem extends React.Component<Props, State> {
   }
 
   onSave(e: Event) {
-    const { id, handleTodoChange } = this.props;
+    const { todo, handleTodoChange } = this.props;
     const { todoValue } = this.state;
 
     if (
@@ -199,8 +199,6 @@ export default class TodoItem extends React.Component<Props, State> {
 
   onUpdatePriority(priority: number) {
     const { todo, handleTodoChange } = this.props;
-
-    console.log(priority);
 
     handleTodoChange({ ...todo, priority });
 

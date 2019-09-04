@@ -22,8 +22,6 @@ const mapStateToProps = (state: Object): Object => {
   const visibilityFilter = getVisibilityFilter(state);
   const visibleTodos = getVisibleTodos(getTodos(state), visibilityFilter);
 
-  console.log(sortTodosByDatesAndPriority(visibleTodos));
-
   return {
     error: getTodoError(state),
     todos: sortTodosByDatesAndPriority(visibleTodos),

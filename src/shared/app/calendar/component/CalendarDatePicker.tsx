@@ -15,7 +15,6 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
     super(props);
 
     this.onChange = this.onChange.bind(this);
-    this.onBlur = this.onBlur.bind(this);
   }
 
   render() {
@@ -30,7 +29,7 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
     );
 
     return (
-      <div className={styles.root} onBlur={this.onBlur}>
+      <div className={styles.root}>
         {datePlaceholderElt}
         <DatePicker selected={currentDate} onChange={this.onChange} />
         {closeBtn}
@@ -40,10 +39,5 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
 
   onChange(date: Date) {
     this.props.handleCalendarChange(date);
-  }
-
-  onBlur() {
-    const { handleClose } = this.props;
-    handleClose && handleClose();
   }
 }

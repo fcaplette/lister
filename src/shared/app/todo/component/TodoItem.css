@@ -6,7 +6,6 @@
   padding: 0 12px;
   margin-bottom: 12px;
   min-height: 0;
-  max-height: 0;
   width: 100%;
   box-sizing: border-box;
 
@@ -22,8 +21,7 @@
 
 .root-isVisible {
   min-height: 108px;
-  max-height: 108px;
-  padding: 18px 12px;
+  padding: 18px 12px 40px 12px;
 
   opacity: 1;
 }
@@ -35,6 +33,7 @@
 .row {
   display: flex;
   align-items: center;
+
   padding-bottom: 8px;
 }
 
@@ -48,9 +47,13 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+@media (max-width: 600px) {
+  .text {
+    font-size: 16px;
+  }
 }
 
 .textEdit {
@@ -121,8 +124,8 @@
 }
 
 .check {
-  width: 25px;
-  height: 25px;
+  min-width: 25px;
+  min-height: 25px;
 
   border: 2px solid #3a3335;
   border-radius: 50%;

@@ -20,6 +20,7 @@ const mergeProps = (stateProps: Object, { dispatch }: Object): Object => {
     ...stateProps,
     handleClick(text: string, priority: number, date: Date | null) {
       let ISODate = "";
+
       if (date) {
         ISODate = date.toISOString();
       }
