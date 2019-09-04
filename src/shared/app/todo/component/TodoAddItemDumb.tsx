@@ -70,6 +70,7 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
             placeholder="Describe your task"
             onChange={this.onTextChange}
             onKeyDown={this.onSubmit}
+            maxLength={100}
           />
           <div className={styles.priority}>
             <PriorityButton

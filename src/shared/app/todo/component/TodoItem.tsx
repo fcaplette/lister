@@ -92,6 +92,7 @@ export default class TodoItem extends React.Component<Props, State> {
       <div className={styles.textEdit} onKeyDown={this.onSave}>
         <TextInput
           value={todoValue}
+          maxLength={100}
           handleChange={this.onChangeText}
           handleClose={this.onSave}
           isFocused

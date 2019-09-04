@@ -7,6 +7,7 @@ interface Props {
   value: string;
   positionClass?: string;
   isFocused?: boolean;
+  maxLength?: number;
   handleChange: (value: string) => void;
   handleClose?: () => void;
   placeholder?: string;
@@ -36,7 +37,7 @@ export default class TextInput extends React.Component<Props, State> {
   }
 
   render() {
-    const { placeholder, value } = this.props;
+    const { placeholder, value, maxLength } = this.props;
     const { currentValue, isActive } = this.state;
 
     // Classes
@@ -54,6 +55,7 @@ export default class TextInput extends React.Component<Props, State> {
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           placeholder={placeholder}
+          maxLength={maxLength}
         />
         <span className={borderClasses} />
       </div>
