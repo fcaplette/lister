@@ -74,7 +74,12 @@ export default class TodoItem extends React.Component<Props, State> {
     });
 
     const dateClasses = classNames(styles.date, {
-      [styles["date-isPast"]]: moment().diff(date, "days") > 0
+      [styles["date-isPast"]]: moment().diff(date, "days") > 0,
+      [styles["date-isVisible"]]: !isFadingOut
+    });
+
+    const emptyDateClasses = classNames(styles.emptyDateText, {
+      [styles["emptyDateText-isVisible"]]: !isFadingOut
     });
 
     // Elements
@@ -103,7 +108,7 @@ export default class TodoItem extends React.Component<Props, State> {
         {moment(date).format("LL")}
       </span>
     ) : (
-      <span className={styles.emptyDateText} onClick={this.onEditDate}>
+      <span className={emptyDateClasses} onClick={this.onEditDate}>
         Add a date
       </span>
     );
@@ -151,7 +156,7 @@ export default class TodoItem extends React.Component<Props, State> {
         this.setState({
           isFadingOut: false
         });
-      }, 500);
+      }, 400);
     }
   }
 

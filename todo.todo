@@ -45,7 +45,8 @@
 ✔ Patch a todo to allow it to change date @done(19-09-04 08:12)
 ✔ Patch a todo to allow it to change text @done(19-09-04 08:12)
 ✔ Patch a todo to allow it to change priority @done(19-09-04 08:12)
-☐ Fix Todo complete animation
+☐ Fix edit date calendar close on click
+✔ Fix Todo complete animation @done(19-09-04 16:23)
 ☐ get the user ID from the token (store token in DB?)
 ☐ Switch DB to be PROD ready
 ☐ Handle redirection with NextJs before the rendering if a user is not connected

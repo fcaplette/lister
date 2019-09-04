@@ -70,12 +70,17 @@
   color: #ededed;
   font-family: Helvetica, sans-serif;
   background-color: #00a676;
+  opacity: 0;
 
   border-radius: 0 8px 8px 0;
 
   cursor: pointer;
 
   transition: 0.3s;
+}
+
+.date-isVisible {
+  opacity: 1;
 }
 
 .date:hover {
@@ -90,12 +95,17 @@
   height: 30px;
 
   color: #ababab;
+  opacity: 0;
 
   text-decoration: underline;
 
   cursor: pointer;
 
   transition: 0.3s;
+}
+
+.emptyDateText-isVisible {
+  opacity: 1;
 }
 
 .emptyDateText:hover {
