@@ -82,6 +82,10 @@ export default class TodoItem extends React.Component<Props, State> {
       [styles["emptyDateText-isVisible"]]: !isFadingOut
     });
 
+    const rowClasses = classNames(styles.row, {
+      [styles["row-isAbsolute"]]: isEditingDate
+    });
+
     // Elements
 
     const priorityMenuElt = isPriorityMenuOpen && (
@@ -116,7 +120,7 @@ export default class TodoItem extends React.Component<Props, State> {
 
     const dateElt = isEditingDate ? (
       <CalendarDatePicker
-        currentDate={moment(date, "YYYY-MM-DD").toDate()}
+        currentDate={date ? moment(date, "YYYY-MM-DD").toDate() : undefined}
         handleCalendarChange={this.onCalendarChange}
         handleClose={this.onCloseCalendar}
       />
@@ -136,7 +140,7 @@ export default class TodoItem extends React.Component<Props, State> {
           />
           {priorityMenuElt}
         </div>
-        <div className={styles.row}>{dateElt}</div>
+        <div className={rowClasses}>{dateElt}</div>
       </li>
     );
   }

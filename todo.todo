@@ -49,6 +49,7 @@
 ✔ Fix Todo complete animation @done(19-09-04 16:23)
 ☐ Animate menu
 ☐ Allow user to pick a date if none were set (Bug)
+☐ Add smaller limit to todo element
 ✔ Allow todo text to be multilines @done(19-09-04 17:03)
 ☐ get the user ID from the token (store token in DB?)
 ☐ Switch DB to be PROD ready
