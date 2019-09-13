@@ -129,6 +129,19 @@
   background-color: #ac1919;
 }
 
+.deleteBtn {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+}
+/* @media (max-width: 600px) {
+  .deleteBtn {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+  }
+} */
+
 .check {
   min-width: 25px;
   min-height: 25px;

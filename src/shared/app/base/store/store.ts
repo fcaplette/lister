@@ -4,7 +4,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import rootReducer from "../reducer/rootReducer";
 
-export default function configureStore(initialState = {}) {
+export function configureStore(initialState = {}) {
   return createStore(
     rootReducer,
     initialState,

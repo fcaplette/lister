@@ -1,8 +1,11 @@
 import * as types from "./todoActionTypes";
 import {
   addTodoEndpoint,
-  patchTodoEndpoint
+  patchTodoEndpoint,
+  deleteTodoEndpoint
 } from "../../../domain/api/endpoints";
+import { getCookie } from "../../base/browser/browserUtils";
+import { accessToken } from "../../login/settings/loginSettings";
 
 export const postTodo = (
   text: string,
@@ -18,17 +21,17 @@ export const postTodo = (
       method: "POST",
       mode: "cors",
       headers: {
+        Authorization: `JWT ${getCookie(accessToken)}`,
         "Content-Type": "application/json"
       },
-      // TEMP: REMOVE HARCODED ID
       body: JSON.stringify({
         todo: { text, priority, date },
-        user_id: userID || 1
+        user_id: userID
       })
     })
       .then(response => response.json())
       .then(json => {
-        dispatch(postTodoSuccess());
+        dispatch(postTodoSuccess(json.id));
       })
       .catch(exception => {
         dispatch(postTodoFailure(exception));
@@ -42,9 +45,10 @@ export const postTodoRequest = () => {
   };
 };
 
-export const postTodoSuccess = () => {
+export const postTodoSuccess = (id: number) => {
   return {
-    type: types.POST_TODO_SUCCESS
+    type: types.POST_TODO_SUCCESS,
+    id
   };
 };
 
@@ -68,8 +72,7 @@ export const addTodoOptimistically = (
 ) => {
   return {
     type: types.ADD_TODO_OPTIMISTICALLY,
-    // TODO: Pass unique id
-    id: Math.round(Math.random() * Math.random * 1000),
+    id: 0,
     text,
     priority,
     date
@@ -111,12 +114,12 @@ export const patchTodo = (userID: number, todo: Object, prevTodo: Object) => {
       method: "PATCH",
       mode: "cors",
       headers: {
+        Authorization: `JWT ${getCookie(accessToken)}`,
         "Content-Type": "application/json"
       },
-      // TEMP: REMOVE HARCODED ID
       body: JSON.stringify({
         todo: { id, text, priority, date, completed },
-        user_id: userID || 1
+        user_id: userID
       })
     })
       .then(response => response.json())
@@ -148,6 +151,56 @@ export const patchTodoFailure = exception => {
   return {
     type: types.PATCH_TODO_FAILURE,
     exception
+  };
+};
+
+export const deleteTodo = (id: number) => {
+  return dispatch => {
+    dispatch(deleteTodoOptimistically(id));
+    dispatch(deleteTodoRequest());
+
+    return fetch(deleteTodoEndpoint, {
+      method: "DELETE",
+      mode: "cors",
+      headers: {
+        Authorization: `JWT ${getCookie(accessToken)}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ id })
+    })
+      .then(response => response.json())
+      .then(json => {
+        dispatch(deleteTodoSuccess());
+      })
+      .catch(exception => {
+        dispatch(deleteTodoFailure(exception));
+        dispatch(showNotification(exception, true));
+      });
+  };
+};
+
+export const deleteTodoOptimistically = (id: number) => {
+  return {
+    type: types.DELETE_TODO_OPTIMISTICALLY,
+    id
+  };
+};
+
+export const deleteTodoRequest = () => {
+  return {
+    type: types.DELETE_TODO_REQUEST
+  };
+};
+
+export const deleteTodoSuccess = () => {
+  return {
+    type: types.DELETE_TODO_SUCCESS
+  };
+};
+
+export const deleteTodoFailure = () => {
+  return {
+    type: types.DELETE_TODO_FAILURE
   };
 };
 

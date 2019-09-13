@@ -1,7 +1,8 @@
+import Router from "next/router";
 import { compose } from "ramda";
 import { connect } from "react-redux";
 
-import { resetTodoError, patchTodo } from "../action/todoActions";
+import { resetTodoError, patchTodo, deleteTodo } from "../action/todoActions";
 import {
   getVisibilityFilter,
   getTodos,
@@ -15,39 +16,48 @@ import {
 import withMount from "../../base/hoc/withMount";
 
 import TodoListDumb from "./TodoListDumb";
-import { fetchUser } from "../../../domain/user/action/userActions";
-import { getUserName } from "../../../domain/user/selector/userSelectors";
+import { fetchCurrentUser } from "../../../domain/user/action/userActions";
+import { getUserID } from "../../../domain/user/selector/userSelectors";
+import { getNotificationMessage } from "../../notification/selector/notificationSelector";
 
 const mapStateToProps = (state: Object): Object => {
   const visibilityFilter = getVisibilityFilter(state);
   const visibleTodos = getVisibleTodos(getTodos(state), visibilityFilter);
 
   return {
+    userID: getUserID(state),
     error: getTodoError(state),
     todos: sortTodosByDatesAndPriority(visibleTodos),
-    visibilityFilter,
+    hasSessionExpired:
+      getNotificationMessage(state) ===
+      "Your session has expired. Please login again.",
+    visibilityFilter
     // merge
-    username: getUserName(state)
   };
 };
 
 const mapDispatchToProps = (dispatch: any): Object => ({ dispatch });
 
 const mergeProps = (stateProps: Object, { dispatch }: Object): Object => {
-  const { username, todos } = stateProps;
+  const { todos, userID } = stateProps;
 
   return {
     ...stateProps,
     handleMount() {
-      dispatch(fetchUser(username));
+      dispatch(fetchCurrentUser());
     },
     handleTodoChange(todo: Object) {
       const prevTodo = getTodoByID(todos, todo.id);
-      // TEMP: REMOVE HARDCODED USER ID
-      dispatch(patchTodo(1, todo, prevTodo));
+      dispatch(patchTodo(userID, todo, prevTodo));
+    },
+    handleDeleteTodo(id: number) {
+      dispatch(deleteTodo(id));
     },
     handleRemoveErrorMessage() {
       dispatch(resetTodoError());
+    },
+    handleSessionExpires() {
+      Router.push("/login");
     }
   };
 };

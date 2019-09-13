@@ -1,4 +1,5 @@
 import * as React from "react";
+import Notification from "../../notification/component/Notification";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
 import DiscreteLink from "../../../ui/link/DiscreteLink";
 
@@ -6,6 +7,7 @@ const styles = require("./LoginForm.css");
 
 interface Props {
   handleSubmit: (email: string, password: string) => void;
+  hasNotification: boolean;
 }
 
 interface State {
@@ -49,11 +51,18 @@ class LoginFormDumb extends React.Component<Props, State> {
   }
 
   render() {
-    const { currentEmail, currentPassword, submitError } = this.props;
+    const {
+      currentEmail,
+      currentPassword,
+      submitError,
+      hasNotification
+    } = this.props;
 
     const submitErrorElt = submitError && (
       <span className={styles.error}>{submitError}</span>
     );
+
+    const notifcationElt = hasNotification && <Notification />;
 
     return (
       <form className={styles.root}>
@@ -87,6 +96,7 @@ class LoginFormDumb extends React.Component<Props, State> {
         >
           Login{" "}
         </PrimaryButton>
+        {notifcationElt}
       </form>
     );
   }

@@ -1,8 +1,12 @@
 import * as types from "./loginActionTypes";
 
-import { loginEndpoint } from "../../../domain/api/endpoints";
+import {
+  loginEndpoint,
+  storeTokenEndpoint
+} from "../../../domain/api/endpoints";
 import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 import { accessToken } from "../settings/loginSettings";
+import { getCookie } from "../../base/browser/browserUtils";
 
 export const loginPost = (username: string, password: string): Object => {
   return dispatch => {
@@ -21,9 +25,11 @@ export const loginPost = (username: string, password: string): Object => {
         if (getResponseErrorMessage(json)) {
           throw getResponseErrorMessage(json);
         } else {
-          if (document && json.access_token) {
-            document.cookie = `${accessToken}=${json.access_token}; Path=/;`;
-            return dispatch(loginPostSuccess(username));
+          if (document && json[accessToken]) {
+            console.log(json[accessToken]);
+
+            document.cookie = `${accessToken}=${json[accessToken]}; Path=/;`;
+            return dispatch(loginPostSuccess());
           } else {
             dispatch(loginPostFailure());
           }
@@ -46,10 +52,9 @@ export const loginPostRequest = (): Object => {
   };
 };
 
-export const loginPostSuccess = (username: string): Object => {
+export const loginPostSuccess = (): Object => {
   return {
-    type: types.LOGIN_SUCCESS,
-    username
+    type: types.LOGIN_SUCCESS
   };
 };
 
@@ -57,5 +62,22 @@ export const loginPostFailure = (exception: string): Object => {
   return {
     type: types.LOGIN_FAILURE,
     exception
+  };
+};
+
+export const showNotification = (
+  exception: string,
+  isError: boolean
+): Object => {
+  return {
+    type: types.SHOW_NOTIFICATION,
+    message: exception,
+    isError
+  };
+};
+
+export const dismissSessionExpiredNotification = (): Object => {
+  return {
+    type: types.HIDE_SESSION_EXPIRED_MESSAGE
   };
 };

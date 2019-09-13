@@ -1,0 +1,31 @@
+.root {
+  position: fixed;
+  top: -40px;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 40px;
+
+  font-size: 16px;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+
+  opacity: 0;
+
+  background-color: #00a676;
+
+  transition: 1s;
+}
+
+.root-isVisible {
+  top: 0;
+
+  opacity: 1;
+}
+
+.root-isError {
+  background-color: #e6461a;
+}

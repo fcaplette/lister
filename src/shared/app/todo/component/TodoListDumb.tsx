@@ -10,8 +10,10 @@ const styles = require("./TodoList.css");
 interface Props {
   error: boolean;
   todos: Array<Object>;
+  hasSessionExpired: boolean;
   handleTodoChange: (todo: Object) => void;
   handleRemoveErrorMessage: () => void;
+  handleSessionExpires: () => void;
   visibilityFilter: string;
 }
 
@@ -21,10 +23,19 @@ export default class TodoList extends React.Component<Props> {
   }
 
   componentDidUpdate(prevProps) {
-    const { error, handleRemoveErrorMessage } = this.props;
+    const {
+      error,
+      hasSessionExpired,
+      handleRemoveErrorMessage,
+      handleSessionExpires
+    } = this.props;
 
     if (!prevProps.error && error) {
       this.errorTimeout = setTimeout(handleRemoveErrorMessage, 3000);
+    }
+
+    if (hasSessionExpired && !prevProps.hasSessionExpired) {
+      handleSessionExpires();
     }
   }
 

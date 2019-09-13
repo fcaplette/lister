@@ -8,6 +8,7 @@ import Header from "../src/shared/app/base/components/Header";
 import TodoList from "../src/shared/app/todo/component/TodoList";
 import TodoAddItem from "../src/shared/app/todo/component/TodoAddItem";
 import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import { accessToken } from "../src/shared/app/login/settings/loginSettings";
 
 const styles = require("../style/index.css");
 
@@ -18,13 +19,13 @@ export default class IndexPage extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken;
+    let token;
 
     if (document && document.cookie) {
-      accessToken = getCookie("access_token");
+      token = getCookie(accessToken);
     }
 
-    if (!accessToken) {
+    if (!token) {
       Router.push("/login");
     }
   }

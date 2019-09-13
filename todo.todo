@@ -48,13 +48,19 @@
 ✔ Fix edit date calendar close on click @done(19-09-04 16:36)
 ✔ Fix Todo complete animation @done(19-09-04 16:23)
 ☐ Animate menu
-☐ Allow user to pick a date if none were set (Bug)
-☐ Add smaller limit to todo element
+✔ Allow user to pick a date if none were set (Bug) @done(19-09-07 13:22)
+✔ Add smaller limit to todo element @done(19-09-07 13:22)
 ✔ Allow todo text to be multilines @done(19-09-04 17:03)
-☐ get the user ID from the token (store token in DB?)
+✔ get the user ID from the token (store token in DB?) @done(19-09-13 16:45)
+☐ Disable login button when empty
+✔ Allow autocomplete to work when logging in @done(19-09-13 16:45)
 ☐ Switch DB to be PROD ready
 ☐ Handle redirection with NextJs before the rendering if a user is not connected
 ✔ Post a todo @done(19-08-24 16:54)
+☐ Delete a todo
+☐ Focus in input when editing todo text
+✔ Fix the todo id assignment @done(19-09-13 16:50)
+✔ redirect the user to login when a session expires @done(19-09-13 17:32)
 
 
 

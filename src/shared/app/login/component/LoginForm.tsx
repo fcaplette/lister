@@ -5,6 +5,7 @@ import { withRouter } from "next/router";
 import LoginFormDumb from "./LoginFormDumb";
 import { loginPost } from "../action/loginActions";
 import { getLoginError } from "../selector/loginSelectors";
+import { getNotificationMessage } from "../../notification/selector/notificationSelector";
 
 interface Props {
   router: any;
@@ -12,7 +13,8 @@ interface Props {
 
 const mapStateToProps = (state: Object): Object => {
   return {
-    submitError: getLoginError(state)
+    submitError: getLoginError(state),
+    hasNotification: !!getNotificationMessage(state)
   };
 };
 
@@ -30,7 +32,7 @@ const mergeProps = (
         .then(() => {
           router.push("/");
         })
-        .catch(() => {
+        .catch(err => {
           // Do nothing
         });
     }

@@ -8,12 +8,15 @@ import TextInput from "../../../ui/input/TextInput";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
 import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
+import CloseButton from "../../../ui/button/CloseButton";
+import DeleteButton from "../../../ui/button/DeleteButton";
 
 const styles = require("./TodoItem.css");
 
 interface Props {
   todo: Object; // id, text, completed, priority, date
   handleTodoChange: (todo: Object) => Object;
+  handleDeleteTodo: (id: number) => void;
   visibilityFilter: string;
 }
 
@@ -49,6 +52,8 @@ export default class TodoItem extends React.Component<Props, State> {
 
     this.onChangeText = this.onChangeText.bind(this);
     this.onSave = this.onSave.bind(this);
+
+    this.onDeleteTodo = this.onDeleteTodo.bind(this);
   }
 
   render() {
@@ -133,14 +138,20 @@ export default class TodoItem extends React.Component<Props, State> {
         <div className={styles.row}>
           <button className={checkClasses} onClick={this.onToggleTodo} />
           {todoText}
+          <DeleteButton
+            handleClick={this.onDeleteTodo}
+            positionClass={styles.deleteBtn}
+          />
           <PriorityButton
             handleClick={this.onPriorityClick}
             positionClass={styles.priority}
             priorityValue={priority}
           />
-          {priorityMenuElt}
         </div>
-        <div className={rowClasses}>{dateElt}</div>
+        <div className={rowClasses}>
+          {priorityMenuElt}
+          {dateElt}
+        </div>
       </li>
     );
   }
@@ -230,5 +241,13 @@ export default class TodoItem extends React.Component<Props, State> {
     handleTodoChange({ ...todo, date: date.toISOString() });
 
     this.setState({ isEditingDate: false });
+  }
+
+  onDeleteTodo() {
+    const { todo, handleDeleteTodo } = this.props;
+
+    if (confirm("Are you sure you want to delete this todo?")) {
+      handleDeleteTodo(todo.id);
+    }
   }
 }

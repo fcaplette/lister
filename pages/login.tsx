@@ -4,6 +4,7 @@ import { render } from "react-dom";
 import LoginForm from "../src/shared/app/login/component/LoginForm";
 import PageTitle from "../src/shared/ui/text/PageTitle";
 import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import { accessToken } from "../src/shared/app/login/settings/loginSettings";
 
 const styles = require("../style/login.css");
 
@@ -15,13 +16,13 @@ export default class LoginPage extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken;
+    let token;
 
     if (document && document.cookie) {
-      accessToken = getCookie("access_token");
+      token = getCookie(accessToken);
     }
 
-    if (accessToken) {
+    if (token) {
       Router.push("/");
     }
   }

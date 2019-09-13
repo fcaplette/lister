@@ -1,46 +1,70 @@
 import * as types from "./userActionTypes";
 import { userEndpoint } from "../../api/endpoints";
+import {
+  getCookie,
+  deleteCookie
+} from "../../../app/base/browser/browserUtils";
+import { accessToken } from "../../../app/login/settings/loginSettings";
+import { showNotification } from "../../../app/login/action/loginActions";
 
-export const fetchUser = (
-  // TEMP
-  username: string = "frederic@e-180.com"
-): Array<Object> => {
+export const fetchCurrentUser = (): Array<Object> => {
   return dispatch => {
-    dispatch(fetchUserRequest());
-    return fetch(userEndpoint(username), {
+    dispatch(fetchCurrentUserRequest());
+
+    if (!document) {
+      throw "Document is not defined";
+    }
+
+    return fetch(userEndpoint, {
       method: "GET",
       mode: "cors",
       headers: {
+        Authorization: `JWT ${getCookie(accessToken)}`,
         "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
       .then(json => {
-        dispatch(fetchUserSuccess(json.user_id, json.todos));
+        if (json.status_code >= 400) {
+          throw json.error;
+        }
+
+        dispatch(fetchCurrentUserSuccess(json.id, json.todos));
       })
       .catch(err => {
-        dispatch(fetchUserFailure(err));
+        deleteCookie(accessToken);
+
+        const errorMessage =
+          err === "Invalid token"
+            ? "Your session has expired. Please login again."
+            : "An error occured. Please login again.";
+
+        dispatch(showNotification(errorMessage, true));
+        dispatch(fetchCurrentUserFailure(err));
       });
   };
 };
 
-export const fetchUserRequest = () => {
+export const fetchCurrentUserRequest = () => {
   return {
-    type: types.FETCH_USER_REQUEST
+    type: types.FETCH_CURRENT_USER_REQUEST
   };
 };
 
-export const fetchUserSuccess = (userID: number, todos: Array<Object>) => {
+export const fetchCurrentUserSuccess = (
+  userID: number,
+  todos: Array<Object>
+) => {
   return {
-    type: types.FETCH_USER_SUCCESS,
+    type: types.FETCH_CURRENT_USER_SUCCESS,
     userID,
     todos
   };
 };
 
-export const fetchUserFailure = (err: string) => {
+export const fetchCurrentUserFailure = (err: string) => {
   return {
-    type: types.FETCH_USER_FAILURE,
+    type: types.FETCH_CURRENT_USER_FAILURE,
     err
   };
 };
