@@ -1,6 +1,6 @@
 import * as types from "./signupActionTypes";
-import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 
+import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 import { signupEndpoint } from "../../../domain/api/endpoints";
 
 export function registerUser(username, password): Object {
@@ -18,7 +18,7 @@ export function registerUser(username, password): Object {
       .then(response => response.json())
       .then(json => {
         if (getResponseErrorMessage(json)) {
-          throw new Error(getResponseErrorMessage(json));
+          throw getResponseErrorMessage(json);
         } else {
           return dispatch(registerUserSuccess());
         }
@@ -27,7 +27,11 @@ export function registerUser(username, password): Object {
         if (typeof exception === "string") {
           dispatch(registerUserFailure(exception));
         } else {
-          dispatch(registerUserFailure("Something went wrong"));
+          dispatch(
+            registerUserFailure(
+              "There was an error while signing you up. Please try again."
+            )
+          );
         }
         throw exception;
       });

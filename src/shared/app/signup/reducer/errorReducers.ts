@@ -5,6 +5,9 @@ const error = (state: Object = "", action: Object) => {
     case types.REGISTER_USER_FAILURE:
       return action.exception;
 
+    case types.REGISTER_USER_REQUEST:
+      return "";
+
     default:
       return state;
   }

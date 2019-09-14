@@ -6,7 +6,7 @@ import {
 import NotificationDumb from "./NotificationDumb";
 import { compose } from "ramda";
 import { connect } from "react-redux";
-import { dismissSessionExpiredNotification } from "../../login/action/loginActions";
+import { dismissNotification } from "../../login/action/loginActions";
 
 const mapStateToProps = (state: Object, props: Object): Object => {
   const { message } = props;
@@ -19,7 +19,7 @@ const mapStateToProps = (state: Object, props: Object): Object => {
 
 const mapDispatchToProps = (dispatch: any): Object => ({
   handleDismissNotification() {
-    dispatch(dismissSessionExpiredNotification());
+    dispatch(dismissNotification());
   }
 });
 

@@ -7,6 +7,7 @@ import {
 
 import { accessToken } from "../../../app/login/settings/loginSettings";
 import { showNotification } from "../../../app/login/action/loginActions";
+import { tokenError } from "../../../app/todo/settings/todoSettings";
 import { userEndpoint } from "../../api/endpoints";
 
 export const fetchCurrentUser = (): Array<Object> => {
@@ -35,10 +36,11 @@ export const fetchCurrentUser = (): Array<Object> => {
       })
       .catch(err => {
         deleteCookie(accessToken);
+        console.log(err);
 
         const errorMessage =
           err === "Invalid token"
-            ? "Your session has expired. Please login again."
+            ? tokenError
             : "An error occured. Please login again.";
 
         dispatch(showNotification(errorMessage, true));

@@ -3,6 +3,8 @@ import * as React from "react";
 import DiscreteLink from "../../../ui/link/DiscreteLink";
 import Notification from "../../notification/component/Notification";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
+import { isValidEmail } from "../../signup/util/signupUtils";
+import { string } from "prop-types";
 
 const styles = require("./LoginForm.css");
 
@@ -14,12 +16,14 @@ interface Props {
 interface State {
   currentEmail: string;
   currentPassword: string;
+  emailError: string;
 }
 
 class LoginFormDumb extends React.Component<Props, State> {
   state = {
     currentEmail: "",
-    currentPassword: ""
+    currentPassword: "",
+    emailError: ""
   };
 
   constructor(props: Props) {
@@ -51,13 +55,25 @@ class LoginFormDumb extends React.Component<Props, State> {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { currentEmail, emailError } = this.state;
+
+    console.log(currentEmail, isValidEmail(currentEmail), emailError);
+
+    if (currentEmail && !isValidEmail(currentEmail) && !emailError) {
+      this.setState({
+        emailError: "This is not a valid email."
+      });
+    }
+  }
+
   render() {
-    const {
-      currentEmail,
-      currentPassword,
-      submitError,
-      hasNotification
-    } = this.props;
+    const { currentEmail, currentPassword, emailError } = this.state;
+    const { submitError, hasNotification } = this.props;
+
+    const emailErrorElt = emailError && (
+      <span className={styles.error}>{emailError}</span>
+    );
 
     const submitErrorElt = submitError && (
       <span className={styles.error}>{submitError}</span>
@@ -77,6 +93,7 @@ class LoginFormDumb extends React.Component<Props, State> {
             value={currentEmail}
             ref={this.emailRef}
           />
+          {emailErrorElt}
         </div>
         <div className={styles.section}>
           <label htmlFor="password">Password </label>
@@ -94,8 +111,11 @@ class LoginFormDumb extends React.Component<Props, State> {
         <PrimaryButton
           positionClass={styles.submitBtn}
           handleClick={this.onSubmit}
+          isDisabled={
+            !currentPassword || !currentEmail || !isValidEmail(currentEmail)
+          }
         >
-          Login{" "}
+          Login
         </PrimaryButton>
         {notifcationElt}
       </form>

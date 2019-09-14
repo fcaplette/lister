@@ -2,6 +2,7 @@ import * as React from "react";
 
 import DiscreteLink from "../../../ui/link/DiscreteLink";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
+import { isValidEmail } from "../util/signupUtils";
 
 const styles = require("../../login/component/LoginForm.css");
 
@@ -11,18 +12,24 @@ interface Props {
 }
 
 interface State {
+  showSubmitError: boolean;
   currentEmail: string;
   currentPassword: string;
   currentConfirmPassword: string;
-  error: string;
+  emailError: string;
+  passwordError: string;
+  confirmPasswordError: string;
 }
 
 class SignupFormDumb extends React.Component<Props, State> {
   state = {
+    showSubmitError: false,
     currentEmail: "",
     currentPassword: "",
     currentConfirmPassword: "",
-    error: ""
+    emailError: "",
+    passwordError: "",
+    confirmPasswordError: ""
   };
 
   constructor(props: Props) {
@@ -63,20 +70,112 @@ class SignupFormDumb extends React.Component<Props, State> {
     }
   }
 
-  render() {
+  componentDidUpdate(prevProps, prevState) {
     const { submitError } = this.props;
     const {
+      showSubmitError,
       currentEmail,
       currentPassword,
       currentConfirmPassword,
-      error
+      emailError,
+      passwordError,
+      confirmPasswordError
     } = this.state;
 
+    const isPasswordTooShort = currentPassword.length < 6;
+
+    //  Submit error removal
+    if (
+      currentEmail !== prevState.currentEmail &&
+      submitError &&
+      showSubmitError
+    ) {
+      this.setState({
+        showSubmitError: false
+      });
+    }
+
+    // Email Validation
+    if (currentEmail && !isValidEmail(currentEmail) && !emailError) {
+      this.setState({
+        emailError: "Your email is not valid."
+      });
+    } else if (
+      currentEmail &&
+      !isValidEmail(prevState.currentEmail) &&
+      isValidEmail(currentEmail)
+    ) {
+      this.setState({
+        emailError: ""
+      });
+    }
+
+    // Password Validation
+    if (currentPassword && isPasswordTooShort && !passwordError) {
+      this.setState({
+        passwordError: "Your password must be at least 6 characters."
+      });
+    } else if (currentPassword && !isPasswordTooShort && passwordError) {
+      this.setState({
+        passwordError: ""
+      });
+    }
+
+    // Confirm Password Validation
+    if (
+      currentConfirmPassword &&
+      currentConfirmPassword !== currentPassword &&
+      !confirmPasswordError
+    ) {
+      this.setState({
+        confirmPasswordError: "Your passwords don't match."
+      });
+    } else if (
+      currentConfirmPassword &&
+      currentConfirmPassword === currentPassword &&
+      confirmPasswordError
+    ) {
+      this.setState({
+        confirmPasswordError: ""
+      });
+    }
+  }
+
+  render() {
+    const { submitError } = this.props;
+    const {
+      showSubmitError,
+      currentEmail,
+      currentPassword,
+      currentConfirmPassword,
+      emailError,
+      passwordError,
+      confirmPasswordError
+    } = this.state;
+
+    const isPasswordTooShort = currentPassword.length < 6;
+
     // Elements
-    const errorElt = error && <span className={styles.error}>{error}</span>;
-    const submitErrorElt = submitError && (
-      <span className={styles.error}>{submitError}</span>
+    const emailErrorElt = emailError && currentEmail && (
+      <div className={styles.error}>{emailError}</div>
     );
+
+    const passwordErrorElt = currentPassword && passwordError && (
+      <div className={styles.error}>{passwordError}</div>
+    );
+
+    const confirmPasswordErrorElt = currentConfirmPassword &&
+      confirmPasswordError && (
+        <div className={styles.error}>{confirmPasswordError}</div>
+      );
+
+    const submitErrorElt = submitError && showSubmitError && (
+      <div className={styles.submitError}>{submitError}</div>
+    );
+
+    // conditions
+    const isFormNotFilled =
+      !currentEmail || !currentPassword || !currentConfirmPassword;
 
     return (
       <form className={styles.root}>
@@ -91,7 +190,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             ref={this.emailRef}
             placeholder="Email used to login"
           />
-          {submitErrorElt}
+          {emailErrorElt}
         </div>
         <div className={styles.section}>
           <label htmlFor="password">Password </label>
@@ -104,6 +203,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             placeholder="Min. 6 characters"
             ref={this.passwordRef}
           />
+          {passwordErrorElt}
         </div>
         <div className={styles.section}>
           <label htmlFor="confirm-password">Confirm Password </label>
@@ -114,16 +214,24 @@ class SignupFormDumb extends React.Component<Props, State> {
             onChange={this.onConfirmPasswordChange}
             value={currentConfirmPassword}
           />
-          {errorElt}
+          {confirmPasswordErrorElt}
         </div>
-        <DiscreteLink href="/login">Already have an account?</DiscreteLink>
-        <PrimaryButton
-          positionClass={styles.submitBtn}
-          handleClick={this.onSubmit}
-          ref={this.confirmPasswordRef}
-        >
-          Register
-        </PrimaryButton>
+        <div className={styles.errorSection}>{submitErrorElt}</div>
+        <div className={styles.footer}>
+          <DiscreteLink href="/login">Already have an account?</DiscreteLink>
+          <PrimaryButton
+            positionClass={styles.submitBtn}
+            handleClick={this.onSubmit}
+            ref={this.confirmPasswordRef}
+            isDisabled={
+              isFormNotFilled ||
+              currentConfirmPassword !== currentPassword ||
+              isPasswordTooShort
+            }
+          >
+            Register
+          </PrimaryButton>
+        </div>
       </form>
     );
   }
@@ -136,15 +244,13 @@ class SignupFormDumb extends React.Component<Props, State> {
 
   onPasswordChange(e: Event) {
     this.setState({
-      currentPassword: e.target.value,
-      error: ""
+      currentPassword: e.target.value
     });
   }
 
   onConfirmPasswordChange(e: Event) {
     this.setState({
-      currentConfirmPassword: e.target.value,
-      error: ""
+      currentConfirmPassword: e.target.value
     });
   }
 
@@ -152,16 +258,15 @@ class SignupFormDumb extends React.Component<Props, State> {
     const {
       currentEmail,
       currentPassword,
-      currentConfirmPassword
+      currentConfirmPassword,
+      error
     } = this.state;
 
-    if (currentConfirmPassword !== currentPassword) {
-      this.setState({
-        error: "Your passwords don't match."
-      });
-    } else {
-      this.props.handleSubmit(currentEmail, currentPassword);
-    }
+    this.setState({
+      showSubmitError: true
+    });
+
+    this.props.handleSubmit(currentEmail, currentPassword);
   }
 }
 

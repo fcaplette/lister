@@ -27,8 +27,6 @@ export const loginPost = (username: string, password: string): Object => {
           throw getResponseErrorMessage(json);
         } else {
           if (document && json[accessToken]) {
-            console.log(json[accessToken]);
-
             document.cookie = `${accessToken}=${json[accessToken]}; Path=/;`;
             return dispatch(loginPostSuccess());
           } else {
@@ -37,12 +35,9 @@ export const loginPost = (username: string, password: string): Object => {
         }
       })
       .catch(exception => {
-        if (typeof exception === "string") {
-          dispatch(loginPostFailure(exception));
-        } else {
-          dispatch(loginPostFailure("Something went wrong"));
-        }
-        throw exception;
+        dispatch(
+          loginPostFailure("This email and password combination is not valid.")
+        );
       });
   };
 };
@@ -77,8 +72,8 @@ export const showNotification = (
   };
 };
 
-export const dismissSessionExpiredNotification = (): Object => {
+export const dismissNotification = (): Object => {
   return {
-    type: types.HIDE_SESSION_EXPIRED_MESSAGE
+    type: types.DISMISS_NOTIFICATION
   };
 };

@@ -61,6 +61,10 @@
 ☐ Focus in input when editing todo text
 ☐ Handle All hover state of buttons and icons
 ☐ In priority menu, show which one is currently selected
+☐ BUG: CSS style sheets not loading sometimes
+☐ Store does not have a valid reducer error
+☐ Handle All possible errors during login
+✔ Handle all possible errors during signup @done(19-09-14 16:54)
 ✔ Fix the todo id assignment @done(19-09-13 16:50)
 ✔ redirect the user to login when a session expires @done(19-09-13 17:32)
 

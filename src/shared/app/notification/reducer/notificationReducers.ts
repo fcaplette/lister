@@ -12,7 +12,7 @@ const notification = (
         message: action.message
       };
 
-    case types.HIDE_SESSION_EXPIRED_MESSAGE:
+    case types.DISMISS_NOTIFICATION:
       return {
         ...state,
         isError: false,

@@ -1,67 +1,39 @@
-/* @flow */
-import * as React from "react";
+import NavDumb from "./NavDumb";
+import { compose } from "ramda";
+import { connect } from "react-redux";
+import { dismissNotification } from "../login/action/loginActions";
+import { withRouter } from "next/router";
 
-import CloseButton from "../../ui/button/CloseButton";
-import NavCollapsed from "./NavCollapsed";
-import NavItem from "./NavItem";
-import { accessToken } from "../login/settings/loginSettings";
-import { deleteCookie } from "../base/browser/browserUtils";
-
-const styles = require("./Nav.css");
-
-interface Props {}
-
-interface State {
-  isCollapsed: boolean;
+interface Props {
+  router: any;
 }
 
-export default class Nav extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
+const mapStateToProps = (state: Object): Object => {
+  return {
+    ...state
+  };
+};
 
-    this.state = {
-      isCollapsed: true
-    };
+const mapDispatchToProps = (dispatch: any): Object => ({ dispatch });
 
-    const self: any = this;
-    self.onCloseBtnClick = this.onCloseBtnClick.bind(this);
-    self.onLogout = this.onLogout.bind(this);
-  }
-
-  render() {
-    // const {} = this.props;
-    const { isCollapsed } = this.state;
-
-    // Elements
-
-    if (isCollapsed) {
-      return <NavCollapsed handleClick={this.onCloseBtnClick} />;
-    } else {
-      return (
-        <div className={styles.root}>
-          <div className={styles.overlay} />
-          <div className={styles.nav}>
-            <CloseButton
-              positionClass={styles.closeBtn}
-              handleClick={this.onCloseBtnClick}
-            />
-            <NavItem href="/">Home</NavItem>
-            <NavItem href="/about">About</NavItem>
-            <NavItem handleClick={this.onLogout}>Logout</NavItem>
-          </div>
-        </div>
-      );
+const mergeProps = (
+  stateProps: Object,
+  { dispatch }: Object,
+  { router }: Props
+): Object => {
+  return {
+    ...stateProps,
+    handleLogout() {
+      router.push("/login");
     }
-  }
+  };
+};
 
-  onCloseBtnClick() {
-    this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }));
-  }
-
-  onLogout() {
-    if (document) {
-      deleteCookie(accessToken);
-      location.reload();
-    }
-  }
-}
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    mergeProps
+  )
+)(NavDumb);

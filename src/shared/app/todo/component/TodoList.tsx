@@ -12,11 +12,14 @@ import {
 
 import Router from "next/router";
 import TodoListDumb from "./TodoListDumb";
+import { accessToken } from "../../login/settings/loginSettings";
 import { compose } from "ramda";
 import { connect } from "react-redux";
 import { fetchCurrentUser } from "../../../domain/user/action/userActions";
+import { getCookie } from "../../base/browser/browserUtils";
 import { getNotificationMessage } from "../../notification/selector/notificationSelector";
 import { getUserID } from "../../../domain/user/selector/userSelectors";
+import { tokenError } from "../settings/todoSettings";
 import withMount from "../../base/hoc/withMount";
 
 const mapStateToProps = (state: Object): Object => {
@@ -27,9 +30,7 @@ const mapStateToProps = (state: Object): Object => {
     userID: getUserID(state),
     error: getTodoError(state),
     todos: sortTodosByDatesAndPriority(visibleTodos),
-    hasSessionExpired:
-      getNotificationMessage(state) ===
-      "Your session has expired. Please login again.",
+    hasSessionExpired: getNotificationMessage(state) === tokenError,
     visibilityFilter
     // merge
   };
@@ -43,7 +44,9 @@ const mergeProps = (stateProps: Object, { dispatch }: Object): Object => {
   return {
     ...stateProps,
     handleMount() {
-      dispatch(fetchCurrentUser());
+      if (getCookie(accessToken)) {
+        dispatch(fetchCurrentUser());
+      }
     },
     handleTodoChange(todo: Object) {
       const prevTodo = getTodoByID(todos, todo.id);
