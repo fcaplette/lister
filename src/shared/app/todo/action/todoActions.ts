@@ -1,11 +1,13 @@
 import * as types from "./todoActionTypes";
+
 import {
   addTodoEndpoint,
-  patchTodoEndpoint,
-  deleteTodoEndpoint
+  deleteTodoEndpoint,
+  patchTodoEndpoint
 } from "../../../domain/api/endpoints";
-import { getCookie } from "../../base/browser/browserUtils";
+
 import { accessToken } from "../../login/settings/loginSettings";
+import { getCookie } from "../../base/browser/browserUtils";
 
 export const postTodo = (
   text: string,

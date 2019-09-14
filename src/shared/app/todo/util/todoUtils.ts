@@ -1,6 +1,6 @@
-import { DateTime, Duration } from "luxon";
-
 import * as consts from "../constant/todoConstants";
+
+import { DateTime, Duration } from "luxon";
 
 export const getVisibleTodos = (todos, filter) => {
   switch (filter) {

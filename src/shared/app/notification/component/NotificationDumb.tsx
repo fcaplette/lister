@@ -1,8 +1,8 @@
 import * as React from "react";
-import classNames from "classnames";
 
-import PrimaryButton from "../../../ui/button/PrimaryButton";
 import DiscreteLink from "../../../ui/link/DiscreteLink";
+import PrimaryButton from "../../../ui/button/PrimaryButton";
+import classNames from "classnames";
 
 const styles = require("./Notification.css");
 

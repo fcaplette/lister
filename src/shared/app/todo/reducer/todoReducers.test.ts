@@ -1,5 +1,6 @@
-import todoReducers from "./todoReducers";
 import * as types from "../action/todoActionTypes";
+
+import todoReducers from "./todoReducers";
 
 const prevEmptyState = [];
 const stateWithTodo = [

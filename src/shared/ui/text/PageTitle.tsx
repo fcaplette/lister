@@ -1,6 +1,7 @@
+import * as React from "react";
+
 /* @flow */
 import classNames from "classnames";
-import * as React from "react";
 
 const styles = require("./PageTitle.css");
 

@@ -1,11 +1,10 @@
-import { connect } from "react-redux";
-import { compose } from "ramda";
-import { withRouter } from "next/router";
-
 import LoginFormDumb from "./LoginFormDumb";
-import { loginPost } from "../action/loginActions";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 import { getLoginError } from "../selector/loginSelectors";
 import { getNotificationMessage } from "../../notification/selector/notificationSelector";
+import { loginPost } from "../action/loginActions";
+import { withRouter } from "next/router";
 
 interface Props {
   router: any;

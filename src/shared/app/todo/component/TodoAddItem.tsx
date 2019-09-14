@@ -1,9 +1,8 @@
+import TodoAddItemDumb from "./TodoAddItemDumb";
 import { compose } from "ramda";
 import { connect } from "react-redux";
-
-import TodoAddItemDumb from "./TodoAddItemDumb";
-import { postTodo } from "../action/todoActions";
 import { getUserID } from "../../../domain/user/selector/userSelectors";
+import { postTodo } from "../action/todoActions";
 
 const mapStateToProps = (state: Object): Object => {
   return {

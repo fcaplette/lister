@@ -57,8 +57,10 @@
 ☐ Switch DB to be PROD ready
 ☐ Handle redirection with NextJs before the rendering if a user is not connected
 ✔ Post a todo @done(19-08-24 16:54)
-☐ Delete a todo
+✔ Delete a todo @done(19-09-13 18:22)
 ☐ Focus in input when editing todo text
+☐ Handle All hover state of buttons and icons
+☐ In priority menu, show which one is currently selected
 ✔ Fix the todo id assignment @done(19-09-13 16:50)
 ✔ redirect the user to login when a session expires @done(19-09-13 17:32)
 

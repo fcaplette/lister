@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import TodoItem from "./TodoItem";
-import TodoAddItem from "./TodoAddItem";
 import EmptySectionText from "../../../ui/text/EmptySectionText";
+import TodoAddItem from "./TodoAddItem";
+import TodoItem from "./TodoItem";
 import VisibilityFilter from "./VisibilityFilter";
 
 const styles = require("./TodoList.css");

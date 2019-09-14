@@ -1,11 +1,11 @@
 /* @flow */
 import * as React from "react";
 
-import NavItem from "./NavItem";
-import NavCollapsed from "./NavCollapsed";
-import { deleteCookie } from "../base/browser/browserUtils";
-import { accessToken } from "../login/settings/loginSettings";
 import CloseButton from "../../ui/button/CloseButton";
+import NavCollapsed from "./NavCollapsed";
+import NavItem from "./NavItem";
+import { accessToken } from "../login/settings/loginSettings";
+import { deleteCookie } from "../base/browser/browserUtils";
 
 const styles = require("./Nav.css");
 

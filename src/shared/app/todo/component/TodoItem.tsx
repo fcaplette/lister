@@ -1,15 +1,15 @@
-import classNames from "classnames";
 import * as React from "react";
-import moment from "moment";
 
-import { SHOW_ALL } from "../constant/todoConstants";
-import ContextualButton from "../../../ui/button/ContextualButton";
-import TextInput from "../../../ui/input/TextInput";
-import PriorityButton from "../../../ui/button/PriorityButton";
-import PriorityList from "../../priority/component/PriorityList";
 import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
 import CloseButton from "../../../ui/button/CloseButton";
+import ContextualButton from "../../../ui/button/ContextualButton";
 import DeleteButton from "../../../ui/button/DeleteButton";
+import PriorityButton from "../../../ui/button/PriorityButton";
+import PriorityList from "../../priority/component/PriorityList";
+import { SHOW_ALL } from "../constant/todoConstants";
+import TextInput from "../../../ui/input/TextInput";
+import classNames from "classnames";
+import moment from "moment";
 
 const styles = require("./TodoItem.css");
 

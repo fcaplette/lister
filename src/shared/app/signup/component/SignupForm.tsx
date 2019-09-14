@@ -1,10 +1,9 @@
-import { connect } from "react-redux";
-import { compose } from "ramda";
-import { withRouter } from "next/router";
-
 import SignupFormDumb from "./SignupFormDumb";
-import { registerUser } from "../action/signupActions";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 import { getSignupError } from "../selector/signupSelectors";
+import { registerUser } from "../action/signupActions";
+import { withRouter } from "next/router";
 
 interface Props {
   router: any;

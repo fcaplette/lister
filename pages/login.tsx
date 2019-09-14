@@ -1,10 +1,9 @@
-import Router from "next/router";
-import { render } from "react-dom";
-
 import LoginForm from "../src/shared/app/login/component/LoginForm";
 import PageTitle from "../src/shared/ui/text/PageTitle";
-import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import Router from "next/router";
 import { accessToken } from "../src/shared/app/login/settings/loginSettings";
+import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import { render } from "react-dom";
 
 const styles = require("../style/login.css");
 

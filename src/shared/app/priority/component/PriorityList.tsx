@@ -1,10 +1,10 @@
 import * as React from "react";
+import * as priorities from "../settings/prioritySettings";
 
-import UrgentIcon from "../../../ui/icon/priority/UrgentIcon";
+import LowIcon from "../../../ui/icon/priority/LowIcon";
 import MajorIcon from "../../../ui/icon/priority/MajorIcon";
 import MediumIcon from "../../../ui/icon/priority/MediumIcon";
-import LowIcon from "../../../ui/icon/priority/LowIcon";
-import * as priorities from "../settings/prioritySettings";
+import UrgentIcon from "../../../ui/icon/priority/UrgentIcon";
 
 const styles = require("./PriorityList.css");
 

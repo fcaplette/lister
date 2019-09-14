@@ -1,6 +1,7 @@
 import * as React from "react";
-import DatePicker from "react-datepicker";
+
 import CloseButton from "../../../ui/button/CloseButton";
+import DatePicker from "react-datepicker";
 
 const styles = require("./CalendarDatePicker.css");
 

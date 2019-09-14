@@ -1,24 +1,23 @@
-import Router from "next/router";
-import { compose } from "ramda";
-import { connect } from "react-redux";
-
-import { resetTodoError, patchTodo, deleteTodo } from "../action/todoActions";
+import { deleteTodo, patchTodo, resetTodoError } from "../action/todoActions";
 import {
-  getVisibilityFilter,
-  getTodos,
+  getTodoByID,
   getTodoError,
-  getTodoByID
+  getTodos,
+  getVisibilityFilter
 } from "../selector/todoSelectors";
 import {
   getVisibleTodos,
   sortTodosByDatesAndPriority
 } from "../util/todoUtils";
-import withMount from "../../base/hoc/withMount";
 
+import Router from "next/router";
 import TodoListDumb from "./TodoListDumb";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 import { fetchCurrentUser } from "../../../domain/user/action/userActions";
-import { getUserID } from "../../../domain/user/selector/userSelectors";
 import { getNotificationMessage } from "../../notification/selector/notificationSelector";
+import { getUserID } from "../../../domain/user/selector/userSelectors";
+import withMount from "../../base/hoc/withMount";
 
 const mapStateToProps = (state: Object): Object => {
   const visibilityFilter = getVisibilityFilter(state);

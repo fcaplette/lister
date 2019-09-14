@@ -1,9 +1,10 @@
-import classNames from "classnames";
 import * as React from "react";
-import UrgentIcon from "../icon/priority/UrgentIcon";
+
+import LowIcon from "../icon/priority/LowIcon";
 import MajorIcon from "../icon/priority/MajorIcon";
 import MediumIcon from "../icon/priority/MediumIcon";
-import LowIcon from "../icon/priority/LowIcon";
+import UrgentIcon from "../icon/priority/UrgentIcon";
+import classNames from "classnames";
 
 const styles = require("./PriorityButton.css");
 

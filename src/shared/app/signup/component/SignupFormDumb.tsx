@@ -1,6 +1,7 @@
 import * as React from "react";
-import PrimaryButton from "../../../ui/button/PrimaryButton";
+
 import DiscreteLink from "../../../ui/link/DiscreteLink";
+import PrimaryButton from "../../../ui/button/PrimaryButton";
 
 const styles = require("../../login/component/LoginForm.css");
 
@@ -38,7 +39,7 @@ class SignupFormDumb extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    // Required for browser autofill
+    // Required for browser autofill value to be used as valid form value
     const domEmailValue = this.emailRef.current.value;
     const domPasswordValue = this.passwordRef.current.value;
     const domConfirmPasswordValue = this.confirmPasswordRef.current.value;
@@ -88,6 +89,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             onChange={this.onEmailChange}
             value={currentEmail}
             ref={this.emailRef}
+            placeholder="Email used to login"
           />
           {submitErrorElt}
         </div>
@@ -99,6 +101,7 @@ class SignupFormDumb extends React.Component<Props, State> {
             type="password"
             onChange={this.onPasswordChange}
             value={currentPassword}
+            placeholder="Min. 6 characters"
             ref={this.passwordRef}
           />
         </div>

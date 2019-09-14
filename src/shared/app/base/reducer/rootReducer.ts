@@ -1,8 +1,6 @@
-import { combineReducers } from "redux";
 import appReducers from "./appReducers";
-import domainReducers from "../../../domain/reducer/domainReducers";
+import { combineReducers } from "redux";
 
 export default combineReducers({
-  app: appReducers,
-  domain: domainReducers
+  app: appReducers
 });

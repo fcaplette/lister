@@ -1,5 +1,6 @@
-import { getVisibleTodos, sortTodosByDatesAndPriority } from "./todoUtils";
 import * as consts from "../constant/todoConstants";
+
+import { getVisibleTodos, sortTodosByDatesAndPriority } from "./todoUtils";
 
 describe("getVisibleTodos", () => {
   const todosList = [

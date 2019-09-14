@@ -1,5 +1,6 @@
-import visibilityFilter from "./visibilityReducers";
 import * as types from "../action/visibilityActionTypes";
+
+import visibilityFilter from "./visibilityReducers";
 
 const actionChangeVisiblity = {
   type: types.SHOW_COMPLETED

@@ -1,14 +1,14 @@
 /* @flow */
 
 import * as React from "react";
-import Router from "next/router";
 
 import Head from "../src/shared/app/base/components/Head";
 import Header from "../src/shared/app/base/components/Header";
-import TodoList from "../src/shared/app/todo/component/TodoList";
+import Router from "next/router";
 import TodoAddItem from "../src/shared/app/todo/component/TodoAddItem";
-import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import TodoList from "../src/shared/app/todo/component/TodoList";
 import { accessToken } from "../src/shared/app/login/settings/loginSettings";
+import { getCookie } from "../src/shared/app/base/browser/browserUtils";
 
 const styles = require("../style/index.css");
 

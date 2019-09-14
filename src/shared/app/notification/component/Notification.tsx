@@ -1,11 +1,11 @@
-import { connect } from "react-redux";
-import { compose } from "ramda";
+import {
+  getNotificationIsError,
+  getNotificationMessage
+} from "../../notification/selector/notificationSelector";
 
 import NotificationDumb from "./NotificationDumb";
-import {
-  getNotificationMessage,
-  getNotificationIsError
-} from "../../notification/selector/notificationSelector";
+import { compose } from "ramda";
+import { connect } from "react-redux";
 import { dismissSessionExpiredNotification } from "../../login/action/loginActions";
 
 const mapStateToProps = (state: Object, props: Object): Object => {

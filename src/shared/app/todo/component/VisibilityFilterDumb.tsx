@@ -1,8 +1,9 @@
 import * as React from "react";
+
 import {
+  SHOW_ACTIVE,
   SHOW_ALL,
-  SHOW_COMPLETED,
-  SHOW_ACTIVE
+  SHOW_COMPLETED
 } from "../constant/todoConstants";
 
 const styles = require("./VisibilityFilter.css");

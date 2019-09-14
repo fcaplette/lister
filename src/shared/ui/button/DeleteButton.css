@@ -14,4 +14,12 @@
   border-radius: 50%;
 
   cursor: pointer;
+
+  transition-duration: 0.1s;
+}
+
+.root:hover {
+  transform: scale(1.2);
+
+  background-color: #e6461a;
 }

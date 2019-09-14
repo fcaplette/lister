@@ -1,5 +1,5 @@
-import Header from "../src/shared/app/base/components/Header";
 import Head from "../src/shared/app/base/components/Head";
+import Header from "../src/shared/app/base/components/Header";
 
 const styles = require("../style/index.css");
 

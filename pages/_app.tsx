@@ -1,10 +1,11 @@
 // pages/_app.js
 import * as React from "react";
-import { Provider } from "react-redux";
-import App, { Container } from "next/app";
-import withRedux from "next-redux-wrapper";
 
+import App, { Container } from "next/app";
+
+import { Provider } from "react-redux";
 import { configureStore } from "../src/shared/app/base/store/store";
+import withRedux from "next-redux-wrapper";
 
 class MyApp extends App<Props> {
   static async getInitialProps({ Component, ctx }) {

@@ -1,7 +1,8 @@
 import * as React from "react";
+
+import DiscreteLink from "../../../ui/link/DiscreteLink";
 import Notification from "../../notification/component/Notification";
 import PrimaryButton from "../../../ui/button/PrimaryButton";
-import DiscreteLink from "../../../ui/link/DiscreteLink";
 
 const styles = require("./LoginForm.css");
 

@@ -1,7 +1,6 @@
+import VisibilityFilterDumb from "./VisibilityFilterDumb";
 import { compose } from "ramda";
 import { connect } from "react-redux";
-
-import VisibilityFilterDumb from "./VisibilityFilterDumb";
 import { setVisibilityFilter } from "../action/visibilityActions";
 
 const mapStateToProps = (): Object => {

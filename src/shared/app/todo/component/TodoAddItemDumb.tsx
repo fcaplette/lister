@@ -1,13 +1,13 @@
-import React from "react";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
+import * as priorities from "../../priority/settings/prioritySettings";
+
+import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
+import CalendarTakeover from "../../date/component/CalendarTakeover";
+import PrimaryButton from "../../../ui/button/PrimaryButton";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
-import * as priorities from "../../priority/settings/prioritySettings";
-import CalendarTakeover from "../../date/component/CalendarTakeover";
-
-import "react-datepicker/dist/react-datepicker-cssmodules.css";
-import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
-import PrimaryButton from "../../../ui/button/PrimaryButton";
+import React from "react";
 
 const styles = require("./TodoAddItem.css");
 

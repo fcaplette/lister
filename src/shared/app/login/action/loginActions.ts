@@ -4,9 +4,10 @@ import {
   loginEndpoint,
   storeTokenEndpoint
 } from "../../../domain/api/endpoints";
-import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
+
 import { accessToken } from "../settings/loginSettings";
 import { getCookie } from "../../base/browser/browserUtils";
+import { getResponseErrorMessage } from "../../../domain/util/apiUtils";
 
 export const loginPost = (username: string, password: string): Object => {
   return dispatch => {

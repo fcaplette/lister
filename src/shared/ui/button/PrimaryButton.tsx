@@ -1,7 +1,8 @@
 /* @flow */
 
-import classNames from "classnames";
 import * as React from "react";
+
+import classNames from "classnames";
 
 const styles = require("./PrimaryButton.css");
 

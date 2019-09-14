@@ -1,9 +1,8 @@
-import Router from "next/router";
-
-import SignupForm from "../src/shared/app/signup/component/SignupForm";
 import PageTitle from "../src/shared/ui/text/PageTitle";
-import { getCookie } from "../src/shared/app/base/browser/browserUtils";
+import Router from "next/router";
+import SignupForm from "../src/shared/app/signup/component/SignupForm";
 import { accessToken } from "../src/shared/app/login/settings/loginSettings";
+import { getCookie } from "../src/shared/app/base/browser/browserUtils";
 
 const styles = require("../style/login.css");
 

@@ -1,11 +1,13 @@
 import * as types from "./userActionTypes";
-import { userEndpoint } from "../../api/endpoints";
+
 import {
-  getCookie,
-  deleteCookie
+  deleteCookie,
+  getCookie
 } from "../../../app/base/browser/browserUtils";
+
 import { accessToken } from "../../../app/login/settings/loginSettings";
 import { showNotification } from "../../../app/login/action/loginActions";
+import { userEndpoint } from "../../api/endpoints";
 
 export const fetchCurrentUser = (): Array<Object> => {
   return dispatch => {
