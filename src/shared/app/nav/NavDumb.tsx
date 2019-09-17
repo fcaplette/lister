@@ -1,4 +1,5 @@
 /* @flow */
+import classNames from "classnames";
 import * as React from "react";
 
 import CloseButton from "../../ui/button/CloseButton";
@@ -33,30 +34,43 @@ export default class Nav extends React.Component<Props, State> {
   render() {
     const { isCollapsed } = this.state;
 
+    const navClasses = classNames(styles.nav, {
+      [styles["nav-isVisible"]]: !isCollapsed
+    });
+
+    const overlayClasses = classNames(styles.overlay, {
+      [styles["overlay-isVisible"]]: !isCollapsed
+    });
+
     // Elements
 
+    let colapsedNavElt;
+
     if (isCollapsed) {
-      return <NavCollapsed handleClick={this.onCloseBtnClick} />;
-    } else {
-      return (
-        <div className={styles.root}>
-          <div className={styles.overlay} />
-          <div className={styles.nav}>
+      colapsedNavElt = <NavCollapsed handleClick={this.onCloseBtnClick} />;
+    }
+    return (
+      <div className={styles.root}>
+        {colapsedNavElt}
+        <div className={navClasses}>
+          <div className={overlayClasses} />
+          <div className={styles.navBar}>
             <CloseButton
               positionClass={styles.closeBtn}
               handleClick={this.onCloseBtnClick}
             />
             <NavItem href="/">Home</NavItem>
-            <NavItem href="/about">About</NavItem>
             <NavItem handleClick={this.onLogout}>Logout</NavItem>
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   onCloseBtnClick() {
-    this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }));
+    window.requestAnimationFrame(() => {
+      this.setState(prevState => ({ isCollapsed: !prevState.isCollapsed }));
+    });
   }
 
   onLogout() {

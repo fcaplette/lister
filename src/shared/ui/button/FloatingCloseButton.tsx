@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-const styles = require("./DeleteButton.css");
+const styles = require("./FloatingCloseButton.css");
 
 interface Props {
   positionClass: string;

@@ -16,6 +16,12 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+
+    this.dateRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.dateRef.current.input.focus();
   }
 
   render() {
@@ -32,7 +38,11 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
     return (
       <div className={styles.root}>
         {datePlaceholderElt}
-        <DatePicker selected={currentDate} onChange={this.onChange} />
+        <DatePicker
+          selected={currentDate}
+          onChange={this.onChange}
+          ref={this.dateRef}
+        />
         {closeBtn}
       </div>
     );

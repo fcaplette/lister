@@ -37,6 +37,12 @@
   padding-bottom: 8px;
 }
 
+.priorityMenu {
+  position: relative;
+  bottom: 4px;
+  right: -8px;
+}
+
 .text {
   display: flex;
   align-items: center;
@@ -134,13 +140,6 @@
   right: -4px;
   top: -4px;
 }
-/* @media (max-width: 600px) {
-  .deleteBtn {
-    position: absolute;
-    right: 6px;
-    top: 6px;
-  }
-} */
 
 .check {
   min-width: 25px;
@@ -157,6 +156,10 @@
 }
 
 .check-isCompleted {
+  background-color: #00a676;
+}
+
+.check:hover {
   background-color: #00a676;
 }
 

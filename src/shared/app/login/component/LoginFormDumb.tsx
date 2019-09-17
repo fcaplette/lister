@@ -58,8 +58,6 @@ class LoginFormDumb extends React.Component<Props, State> {
   componentDidUpdate(prevProps, prevState) {
     const { currentEmail, emailError } = this.state;
 
-    console.log(currentEmail, isValidEmail(currentEmail), emailError);
-
     if (currentEmail && !isValidEmail(currentEmail) && !emailError) {
       this.setState({
         emailError: "This is not a valid email."

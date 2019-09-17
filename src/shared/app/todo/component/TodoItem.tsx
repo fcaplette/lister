@@ -3,7 +3,7 @@ import * as React from "react";
 import CalendarDatePicker from "../../calendar/component/CalendarDatePicker";
 import CloseButton from "../../../ui/button/CloseButton";
 import ContextualButton from "../../../ui/button/ContextualButton";
-import DeleteButton from "../../../ui/button/DeleteButton";
+import FloatingCloseButton from "../../../ui/button/FloatingCloseButton";
 import PriorityButton from "../../../ui/button/PriorityButton";
 import PriorityList from "../../priority/component/PriorityList";
 import { SHOW_ALL } from "../constant/todoConstants";
@@ -94,7 +94,10 @@ export default class TodoItem extends React.Component<Props, State> {
     // Elements
 
     const priorityMenuElt = isPriorityMenuOpen && (
-      <PriorityList handleClick={this.onUpdatePriority} />
+      <PriorityList
+        handleClick={this.onUpdatePriority}
+        currentPriority={priority}
+      />
     );
 
     const todoText = isEditingTodo ? (
@@ -138,7 +141,7 @@ export default class TodoItem extends React.Component<Props, State> {
         <div className={styles.row}>
           <button className={checkClasses} onClick={this.onToggleTodo} />
           {todoText}
-          <DeleteButton
+          <FloatingCloseButton
             handleClick={this.onDeleteTodo}
             positionClass={styles.deleteBtn}
           />
@@ -148,10 +151,8 @@ export default class TodoItem extends React.Component<Props, State> {
             priorityValue={priority}
           />
         </div>
-        <div className={rowClasses}>
-          {priorityMenuElt}
-          {dateElt}
-        </div>
+        <div className={rowClasses}>{dateElt}</div>
+        <div className={styles.priorityMenu}>{priorityMenuElt}</div>
       </li>
     );
   }

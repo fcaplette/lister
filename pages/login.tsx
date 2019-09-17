@@ -1,6 +1,7 @@
-import LoginForm from "../src/shared/app/login/component/LoginForm";
-import PageTitle from "../src/shared/ui/text/PageTitle";
 import Router from "next/router";
+
+import PageTitle from "../src/shared/ui/text/PageTitle";
+import LoginForm from "../src/shared/app/login/component/LoginForm";
 import { accessToken } from "../src/shared/app/login/settings/loginSettings";
 import { getCookie } from "../src/shared/app/base/browser/browserUtils";
 import { render } from "react-dom";

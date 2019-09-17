@@ -53,11 +53,15 @@ export default class TodoAddItemDumb extends React.Component<Props, State> {
       isPriorityMenuOpen,
       isCalendarShown,
       currentDate,
+      currentPriority,
       todoText
     } = this.state;
     // Elements
     const priorityMenuElt = isPriorityMenuOpen && (
-      <PriorityList handleClick={this.onSetPriority} />
+      <PriorityList
+        handleClick={this.onSetPriority}
+        currentPriority={currentPriority}
+      />
     );
 
     return (

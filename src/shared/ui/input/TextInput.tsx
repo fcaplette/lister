@@ -31,10 +31,15 @@ export default class TextInput extends React.Component<Props, State> {
     this.onChange = this.onChange.bind(this);
     this.onFocus = this.onFocus.bind(this);
     this.onBlur = this.onBlur.bind(this);
+
+    this.inputRef = React.createRef();
   }
 
   componentDidMount() {
     //TODO: When mounting, if props isFocused true, focus the input by default
+    if (this.props.isFocused) {
+      this.inputRef.current.focus();
+    }
   }
 
   render() {
@@ -57,6 +62,7 @@ export default class TextInput extends React.Component<Props, State> {
           onBlur={this.onBlur}
           placeholder={placeholder}
           maxLength={maxLength}
+          ref={this.inputRef}
         />
         <span className={borderClasses} />
       </div>

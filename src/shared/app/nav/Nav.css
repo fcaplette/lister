@@ -4,6 +4,24 @@
 
 .root {
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.nav {
+  opacity: 0;
+
+  transition-property: opacity;
+  transition-duration: 0.2s;
+
+  pointer-events: none;
+}
+
+.nav-isVisible {
+  opacity: 1;
+
+  pointer-events: initial;
 }
 
 .overlay {
@@ -15,11 +33,12 @@
   width: 100%;
   height: 100%;
 
-  background-color: #000000;
   opacity: 0.5;
+
+  background-color: #000000;
 }
 
-.nav {
+.navBar {
   position: fixed;
   top: 0;
   left: 0;
@@ -28,7 +47,6 @@
   justify-content: flex-start;
   z-index: 4;
 
-  /* TODO: Adjust width based on device size */
   padding: 24px 12px 24px 12px;
   box-sizing: border-box;
 
