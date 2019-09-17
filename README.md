@@ -1,2 +1,3 @@
-# projectManager
-An app to manage your project and see dependencies
+# Listr
+
+An app to manage your list of todos. Open source.

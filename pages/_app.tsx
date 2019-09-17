@@ -8,15 +8,6 @@ import { configureStore } from "../src/shared/app/base/store/store";
 import withRedux from "next-redux-wrapper";
 
 class MyApp extends App<Props> {
-  static async getInitialProps({ Component, ctx }) {
-    // we can dispatch from here too
-    // ctx.store.dispatch({ type: "FOO", payload: "foo" });
-    // const pageProps = Component.getInitialProps
-    //   ? await Component.getInitialProps(ctx)
-    //   : {};
-    // return { pageProps };
-  }
-
   render() {
     const { Component, pageProps, store } = this.props;
     return (

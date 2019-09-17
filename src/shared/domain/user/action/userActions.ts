@@ -36,7 +36,6 @@ export const fetchCurrentUser = (): Array<Object> => {
       })
       .catch(err => {
         deleteCookie(accessToken);
-        console.log(err);
 
         const errorMessage =
           err === "Invalid token"

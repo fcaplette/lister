@@ -21,7 +21,7 @@ export default class CalendarDatePicker extends React.PureComponent<Props> {
   }
 
   componentDidMount() {
-    this.dateRef.current.input.focus();
+    this.props.handleClose && this.dateRef.current.input.focus();
   }
 
   render() {

@@ -36,7 +36,6 @@ export default class TextInput extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    //TODO: When mounting, if props isFocused true, focus the input by default
     if (this.props.isFocused) {
       this.inputRef.current.focus();
     }
