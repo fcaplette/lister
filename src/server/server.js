@@ -15,9 +15,11 @@ app
       return handle(req, res);
     });
 
-    server.listen(9000, err => {
+    const PORT = process.env.PORT || 9000;
+
+    server.listen(PORT, err => {
       if (err) throw err;
-      console.log("> Ready on http://localhost:9000");
+      console.log(`> Server running on ${PORT}`);
     });
   })
   .catch(ex => {

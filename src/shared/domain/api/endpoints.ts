@@ -1,4 +1,4 @@
-const apiUrl = "http://localhost:5000";
+const apiUrl = "https://listr-api-fcaplette.herokuapp.com";
 
 export const loginEndpoint = `${apiUrl}/auth`;
 export const signupEndpoint = `${apiUrl}/signup/`;
