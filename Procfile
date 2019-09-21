@@ -1,2 +1,1 @@
-web: next build
-web: next start
+web: PORT=$PORT next start
