@@ -31,8 +31,10 @@ export const sortTodosByDatesAndPriority = (todos: Array<Object>) => {
         }
       } else if (todo.date) {
         return -1;
-      } else {
+      } else if (todo2.date) {
         return 1;
+      } else {
+        return todo.priority - todo2.priority;
       }
     });
 

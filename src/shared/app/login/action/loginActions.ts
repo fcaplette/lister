@@ -28,7 +28,7 @@ export const loginPost = (username: string, password: string): Object => {
         } else {
           if (document && json[accessToken]) {
             document.cookie = `${accessToken}=${json[accessToken]}; Path=/;`;
-            return dispatch(loginPostSuccess());
+            dispatch(loginPostSuccess());
           } else {
             dispatch(loginPostFailure());
           }

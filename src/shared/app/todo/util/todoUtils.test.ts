@@ -82,6 +82,48 @@ describe("sortTodosByDatesAndPriority", () => {
     expect(sortTodosByDatesAndPriority(todosList)).toEqual(todoListSorted);
   });
 
+  it("sorts the todo items by priority if both dates are undefined", () => {
+    const todosListWithoutDates = [
+      {
+        text: "TodoDate1",
+        priority: 2,
+        date: undefined
+      },
+      {
+        text: "TodoDate2",
+        priority: 3,
+        date: new Date(2019, 11, 27).toISOString()
+      },
+      {
+        text: "TodoDate3",
+        priority: 1,
+        date: undefined
+      }
+    ];
+
+    const sortedList = [
+      {
+        text: "TodoDate2",
+        priority: 3,
+        date: new Date(2019, 11, 27).toISOString()
+      },
+      {
+        text: "TodoDate3",
+        priority: 1,
+        date: undefined
+      },
+      {
+        text: "TodoDate1",
+        priority: 2,
+        date: undefined
+      }
+    ];
+
+    expect(sortTodosByDatesAndPriority(todosListWithoutDates)).toEqual(
+      sortedList
+    );
+  });
+
   it("returns an empty array if no dates are specified", () => {
     expect(sortTodosByDatesAndPriority([])).toEqual([]);
   });

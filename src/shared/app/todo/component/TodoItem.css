@@ -3,26 +3,23 @@
   display: flex;
   flex-direction: column;
 
-  padding: 0 12px;
-  margin-bottom: 12px;
-  min-height: 0;
   width: 100%;
-  box-sizing: border-box;
+  height: 100%;
+  padding: 18px 12px 40px 12px;
+  margin-bottom: 12px;
 
   font-size: 16px;
 
+  box-sizing: border-box;
   opacity: 0;
   border-radius: 12px;
 
-  transition: 0.5s linear;
+  transition: opacity 0.4s ease-out;
 
   background-color: #d8d8d8;
 }
 
 .root-isVisible {
-  min-height: 108px;
-  padding: 18px 12px 40px 12px;
-
   opacity: 1;
 }
 
@@ -79,7 +76,6 @@
   color: #ededed;
   font-family: Helvetica, sans-serif;
   background-color: #00a676;
-  opacity: 0;
 
   border-radius: 0 8px 8px 0;
 
@@ -88,12 +84,23 @@
   transition: 0.3s;
 }
 
-.date-isVisible {
-  opacity: 1;
-}
-
 .date:hover {
   background-color: #157459;
+}
+
+.date-isPast {
+  background-color: #ff2b2b;
+}
+
+.date-isPast:hover {
+  background-color: #ac1919;
+}
+
+.dueDate {
+  padding-bottom: 15px;
+
+  font-family: Helvetica, sans-serif;
+  color: #ff2b2b;
 }
 
 .row-isAbsolute {
@@ -110,7 +117,6 @@
   height: 30px;
 
   color: #ababab;
-  opacity: 0;
 
   text-decoration: underline;
 
@@ -119,20 +125,8 @@
   transition: 0.3s;
 }
 
-.emptyDateText-isVisible {
-  opacity: 1;
-}
-
 .emptyDateText:hover {
   color: #3a3335;
-}
-
-.date-isPast {
-  background-color: #ff2b2b;
-}
-
-.date-isPast:hover {
-  background-color: #ac1919;
 }
 
 .deleteBtn {

@@ -67,11 +67,21 @@ export default class TodoItem extends React.Component<Props, State> {
     } = this.state;
     const { id, completed, priority, date } = todo;
 
+    const dateDiff = moment().diff(date, "days");
+
+    // Texts
+
+    const dueDateTxt =
+      dateDiff === 1
+        ? "This was due yesterday"
+        : `This was due ${dateDiff} days ago`;
+
     // Classes
 
     const rootClasses = classNames(styles.root, {
-      [styles["root-isVisible"]]: !isFadingOut || visibilityFilter === SHOW_ALL,
-      [styles["root-isCompleted"]]: completed
+      [styles["root-isVisible"]]:
+        (!isFadingOut && !completed) || visibilityFilter === SHOW_ALL,
+      [styles["root-isCompleted"]]: !isFadingOut && completed
     });
 
     const checkClasses = classNames(styles.check, {
@@ -79,12 +89,7 @@ export default class TodoItem extends React.Component<Props, State> {
     });
 
     const dateClasses = classNames(styles.date, {
-      [styles["date-isPast"]]: moment().diff(date, "days") > 0,
-      [styles["date-isVisible"]]: !isFadingOut
-    });
-
-    const emptyDateClasses = classNames(styles.emptyDateText, {
-      [styles["emptyDateText-isVisible"]]: !isFadingOut
+      [styles["date-isPast"]]: dateDiff > 0
     });
 
     const rowClasses = classNames(styles.row, {
@@ -92,6 +97,10 @@ export default class TodoItem extends React.Component<Props, State> {
     });
 
     // Elements
+
+    const pastDueTimeElt = dateDiff > 0 && (
+      <span className={styles.dueDate}>{dueDateTxt}</span>
+    );
 
     const priorityMenuElt = isPriorityMenuOpen && (
       <PriorityList
@@ -121,7 +130,7 @@ export default class TodoItem extends React.Component<Props, State> {
         {moment(date).format("LL")}
       </span>
     ) : (
-      <span className={emptyDateClasses} onClick={this.onEditDate}>
+      <span className={styles.emptyDateText} onClick={this.onEditDate}>
         Add a date
       </span>
     );
@@ -153,6 +162,7 @@ export default class TodoItem extends React.Component<Props, State> {
         </div>
         <div className={rowClasses}>{dateElt}</div>
         <div className={styles.priorityMenu}>{priorityMenuElt}</div>
+        {pastDueTimeElt}
       </li>
     );
   }
@@ -169,10 +179,6 @@ export default class TodoItem extends React.Component<Props, State> {
 
       setTimeout(() => {
         handleTodoChange({ ...todo, completed: !todo.completed });
-
-        this.setState({
-          isFadingOut: false
-        });
       }, 400);
     }
   }

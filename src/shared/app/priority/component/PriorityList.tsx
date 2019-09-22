@@ -24,6 +24,17 @@ export default class PriorityList extends React.Component<Props> {
     this.onMediumClick = this.onMediumClick.bind(this);
     this.onLowClick = this.onLowClick.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+
+    this.rootRef = React.createRef();
+  }
+
+  componentDidMount() {
+    document.addEventListener("click", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleClickOutside);
   }
 
   render() {
@@ -46,7 +57,7 @@ export default class PriorityList extends React.Component<Props> {
     });
 
     return (
-      <ul className={styles.root}>
+      <ul className={styles.root} ref={this.rootRef}>
         <li className={urgentClasses} onClick={this.onUrgentClick}>
           <UrgentIcon />
           <div className={styles.text}>Urgent</div>
@@ -70,18 +81,28 @@ export default class PriorityList extends React.Component<Props> {
   onUrgentClick() {
     this.props.handleClick(priorities.URGENT);
   }
+
   onMajorClick() {
     this.props.handleClick(priorities.MAJOR);
   }
+
   onMediumClick() {
     this.props.handleClick(priorities.MEDIUM);
   }
+
   onLowClick() {
     this.props.handleClick(priorities.LOW);
   }
+
   onClose() {
     const { currentPriority, handleClick } = this.props;
 
     handleClick(currentPriority);
+  }
+
+  handleClickOutside(e: Event) {
+    if (this.rootRef.current && !this.rootRef.current.contains(e.target)) {
+      this.onClose();
+    }
   }
 }

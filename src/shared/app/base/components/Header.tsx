@@ -10,6 +10,6 @@ const styles = require("./Header.css");
 export default (): React.ReactElement => (
   <div className={styles.root}>
     <Nav />
-    <PageTitle children={"Listr"} />
+    <PageTitle children={"Lister"} />
   </div>
 );

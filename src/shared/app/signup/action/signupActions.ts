@@ -20,7 +20,7 @@ export function registerUser(username, password): Object {
         if (getResponseErrorMessage(json)) {
           throw getResponseErrorMessage(json);
         } else {
-          return dispatch(registerUserSuccess());
+          dispatch(registerUserSuccess());
         }
       })
       .catch(exception => {
