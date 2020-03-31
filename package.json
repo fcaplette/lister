@@ -39,7 +39,7 @@
     "jest": "^24.7.1",
     "luxon": "^1.13.2",
     "moment": "^2.24.0",
-    "next": "^8.0.3",
+    "next": "^9.3.2",
     "next-redux-wrapper": "^3.0.0-alpha.2",
     "ramda": "^0.26.1",
     "react": "^16.8.4",
